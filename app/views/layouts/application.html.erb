@@ -4,12 +4,28 @@
     <title>Newyear</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
+    <% if current_page?(root_path) %>
+      <%# <%= render 'partial/header' %> %>
+    <%else%>
+      <div></div>
+    <%end%>
+    
+    <% if flash[:notice] %>
+      <div class="alert alert-info">
+        ログインした時に出る【<%= flash[:notice] %>】
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
