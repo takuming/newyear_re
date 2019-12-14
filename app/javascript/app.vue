@@ -34,7 +34,7 @@ const router = new VueRouter({
     { path: "/setgoal/new", component: SetgoalNew },
     { path: "/setgoal/:id(\\d+)/edit'", name: 'SetGoalEdit',component: SetgoalEdit },
 
-    { path: "/lookback/month", component: LookbackMonth },
+    { path: "/lookback/months/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
     { path: "/lookback/reflection", component: LookbackReflection },
     { path: "/lookback/curiosity", component: LookbackCuriosity },
 
@@ -52,11 +52,6 @@ export default {
     return {
       employees: []
     }
-  },
-  mounted () {
-    axios
-      .get('/api/v1/employees.json')
-      .then(response => (this.employees = response.data))
   }
 };
 </script>

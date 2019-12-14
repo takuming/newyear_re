@@ -7,7 +7,7 @@
             <h3>上半期をふりかえろう🧐</h3>
           </div>
           <div class="monthlist">
-            <ul class="wrapper" v-for="l in lbmonths" >
+            <ul class="wrapper"  >
               <!-- <li  v-for="m in monthes" class="detail">
                 <h4>{{m.number}}月</h4>
                 <textarea name="" id="" cols="30" rows="10" 
@@ -22,20 +22,23 @@
               </li> -->
               <li class="detail">
                 <h4>1月</h4>
-                <textarea name="" id="" cols="30" rows="10" 
-                placeholder="この月にあったことを2つ~５つなんでも書き出そう
+                <textarea
+                  class="form"
+                  v-model="lbmonth.jan"
+                  placeholder="この月にあったことを2つ~５つなんでも書き出そう
                 ・仕事であったこと
                 ・恋愛であったこと
                 ・旅行先
                 ・考えたこと
                 ・感感情が動いたこと
-                etc">
-                {{l.jan}}
-                </textarea>
+                etc"
+                  v-on:keyup.enter="updateLbmonth"
+                  v-on:change="updateLbmonth"
+                ></textarea>
               </li>
               <li class="detail">
                 <h4>2月</h4>
-                <textarea name="" id="" cols="30" rows="10" 
+                <textarea v-model="lbmonth.feb" name="" id="" cols="30" rows="10" 
                 placeholder="この月にあったことを2つ~５つなんでも書き出そう
                 ・仕事であったこと
                 ・恋愛であったこと
@@ -43,12 +46,11 @@
                 ・考えたこと
                 ・感感情が動いたこと
                 etc">
-                {{l.feb}}
                 </textarea>
               </li>
               <li class="detail">
                 <h4>3月</h4>
-                <textarea name="" id="" cols="30" rows="10" 
+                <textarea v-model="lbmonth.mar" name="" id="" cols="30" rows="10" 
                 placeholder="この月にあったことを2つ~５つなんでも書き出そう
                 ・仕事であったこと
                 ・恋愛であったこと
@@ -56,12 +58,11 @@
                 ・考えたこと
                 ・感感情が動いたこと
                 etc">
-                {{l.mar}}
                 </textarea>
               </li>
               <li class="detail">
                 <h4>4月</h4>
-                <textarea name="" id="" cols="30" rows="10" 
+                <textarea v-model="lbmonth.apr" name="" id="" cols="30" rows="10" 
                 placeholder="この月にあったことを2つ~５つなんでも書き出そう
                 ・仕事であったこと
                 ・恋愛であったこと
@@ -69,7 +70,6 @@
                 ・考えたこと
                 ・感感情が動いたこと
                 etc">
-                {{l.apr}}
                 </textarea>
               </li>
             </ul>
@@ -87,7 +87,6 @@ import axios from 'axios';
 import HeaderLb from "../components/header-lb.vue";
 
 export default {
-  el: '#demo',
   components: {
     HeaderLb
   },
@@ -99,13 +98,25 @@ export default {
       { number: '3' },
       { number: '4' },
       ],
-     lbmonths:[]
+     lbmonth:{},
    }
  },
  mounted () {
     axios
-      .get('/api/v1/lbmonths.json')
-      .then(response => (this.lbmonths = response.data))
+      .get(`/api/v1/lbmonths/${this.$route.params.id}.json`)
+      .then(response => (this.lbmonth = response.data))
+  },
+  methods: {
+    updateLbmonth: function() {
+      axios
+        .patch(`/api/v1/lbmonths/${this.lbmonth.id}`, this.lbmonth)
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
   }
 }
 </script>
