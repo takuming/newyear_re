@@ -14,18 +14,41 @@
                     <p class="step">STEP1.</p>
                     <h3>月を振り返る</h3>
                     <p class="direct">
-                      <router-link to="/month">直接ノートに行く</router-link></p>
+                      <router-link to="/month">直接ノートに行く</router-link>
+                    </p>
                   </div>
                   <div class="right">
                     <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
                   </div>    
               </a>
             </li>
-            <li>
-              <router-link to="/opening">今年の内省</router-link>
+            <li v-on:click="createReflection">
+              <router-link to="/opening">
+                <div class="left">
+                    <p class="step">STEP2.</p>
+                    <h3>今年の内省</h3>
+                    <p class="direct">
+                      <router-link to="/month">直接ノートに行く</router-link>
+                    </p>
+                </div>
+                <div class="right">
+                    <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                </div>  
+              </router-link>
             </li>
-            <li>
-              <router-link to="/lookback/curiosity">今年の発見</router-link>
+            <li v-on:click="createLbcuriosity">
+              <a>
+                <div class="left">
+                    <p class="step">STEP3.</p>
+                    <h3>今年の発見</h3>
+                    <p class="direct">
+                      <router-link to="/month">直接ノートに行く</router-link>
+                    </p>
+                </div>
+                <div class="right">
+                    <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                </div>  
+              </a>
             </li>
           </ul>
       </div>
@@ -53,7 +76,21 @@ export default {
       .then(response =>{
         this.$router.push({path:'/lookback/month'})
       })
-    }
+    },
+    createReflection: function(){
+      axios
+      .post('/api/v1/lbreflections', this.lbreflections)
+      .then(response =>{
+        this.$router.push({ name: 'Reflection', params: { id:1 } });
+      })
+    },
+    createLbcuriosity: function(){
+      axios
+      .post('/api/v1/lbcuriosities', this.lbcuriosities)
+      .then(response =>{
+        this.$router.push({ name: 'Curiosity', params: { id:1 } });
+      })
+    },
   }
 };
 </script>

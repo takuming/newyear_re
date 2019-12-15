@@ -1,5 +1,5 @@
 class Api::V1::GoalsController < ApiController
-  before_action :set_goal, only: [:show,:update]
+  before_action :set_goal, only: [:show,:update, :destroy]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -30,6 +30,11 @@ class Api::V1::GoalsController < ApiController
     else
       render json: { errors: @goal.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @goal.destroy!
+    head :no_content
   end
 
   private

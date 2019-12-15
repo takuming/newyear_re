@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trance: MyText
+  positive: MyText
+  interesting: MyText
+  comfortable: MyText
+  theme: MyText
+  investment: MyText
+
+two:
+  trance: MyText
+  positive: MyText
+  interesting: MyText
+  comfortable: MyText
+  theme: MyText
+  investment: MyText

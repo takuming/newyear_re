@@ -8,20 +8,13 @@
     <div class="note">
       <ul v-for="g in goals" :key="g.id" class="goals">
         <li class="item">
-          <a href="">
-            <div class="wrapper">
-              <h3 class="title">目標のサンプル</h3>
-              <div>></div>
-            </div>
-          </a>
-        </li>
-        <li class="item">
           <router-link :to="{ name: 'SetgoalEdit', params: { id: g.id } }">
             <div class="wrapper">
               <h3 class="title">{{g.title}}</h3>
               <div>></div>
             </div>
           </router-link>
+          <button @click="deleteTarget = g.id; showModal = true">削除</button>
         </li>
       </ul>
       <div class="button make_goal">
@@ -30,6 +23,9 @@
         </router-link>
       </div>
     </div>
+     <modal v-if="showModal" @cancel="showModal = false" @ok="deleteGoal(); showModal = false;">
+      <div slot="body">削除してもよろしいですか？</div>
+    </modal>
   </div>
 </template>
 
@@ -37,23 +33,54 @@
 
 import axios from 'axios';
 
+import Modal from "../components/modal.vue";
 import HeaderLb from "../components/header-lb.vue";
 
 export default {
   components: {
-    HeaderLb
+    HeaderLb,
+    Modal
   },
   data: function () {
     return {
       goals: [],
+      showModal: false,
+      deleteTarget: -1,
       errors: ''
     }
   },
   mounted(){
+    this.updateGoals();
     axios
       .get('/api/v1/goals.json')
       .then(response => (this.goals = response.data))
-  }
+  },
+  methods: {
+    deleteGoal: function() {
+      if (this.deleteTarget <= 0) {
+        console.warn('deleteTarget should be grater than zero.');
+        return;
+      }
+
+      axios
+        .delete(`/api/v1/goals/${this.deleteTarget}`)
+        .then(response => {
+          this.deleteTarget = -1;
+          this.updateGoals();
+        })
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    updateGoals: function() {
+      axios
+        .get('/api/v1/goals.json')
+        .then(response => (this.goals = response.data))
+    }
+  },
 }
 </script>
 

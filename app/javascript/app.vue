@@ -35,8 +35,8 @@ const router = new VueRouter({
     { path: "/setgoal/:id(\\d+)",name: 'SetgoalEdit',component: SetgoalEdit },
 
     { path: "/lookback/months/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
-    { path: "/lookback/reflection", component: LookbackReflection },
-    { path: "/lookback/curiosity", component: LookbackCuriosity },
+    { path: "/lookback/reflection/:id(\\d+)",name:'Reflection', component: LookbackReflection },
+    { path: "/lookback/curiosity/:id(\\d+)",name:'Curiosity', component: LookbackCuriosity },
 
     { path: "/opening", component: Opening },
     { path: "/intro", component: Intro },
