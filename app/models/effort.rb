@@ -1,0 +1,2 @@
+class Effort < ApplicationRecord
+end

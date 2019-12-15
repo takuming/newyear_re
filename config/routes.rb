@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :employees, only: [:index, :show]
+      resources :efforts, only: [:index, :show, :create, :update]
     end
   end
   namespace :api, {format: 'json'} do

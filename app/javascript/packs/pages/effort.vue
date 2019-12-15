@@ -7,9 +7,33 @@
     </div>
     <div class="note">
       <ul class="quesitions">
-        <li class="item"  v-for="q in questions">
-          <h3 class="title">Q.{{ q.title }}</h3>
-          <textarea name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        <li class="item">
+          <h3 class="title">Q.変えたいこと</h3>
+          <textarea 
+          v-model="effort.change" 
+          v-on:keypress.enter="updateEffort"  name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.つづけたいこと</h3>
+          <textarea v-model="effort.keep" 
+          v-on:keypress.enter="updateEffort" 
+          name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.チャレンジしたいこと</h3>
+          <textarea v-model="effort.challenge" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.どんな影響を周りの人に与えたい</h3>
+          <textarea v-model="effort.influence" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.どんな習慣を持ちたい</h3>
+          <textarea v-model="effort.surround" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.どんな感情で来年を終えたい</h3>
+          <textarea v-model="effort.endofyear" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
         </li>
       </ul>
     </div>
@@ -17,8 +41,10 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 import HeaderIndex from "../components/header-index.vue";
+
 export default {
   components: {
     HeaderIndex
@@ -38,9 +64,27 @@ export default {
       { plholder: 'この月にあったことを2つ~５つなんでも書き出そう' },
       { plholder: '能力、時間、感情・・・・・なんでも書き出してみましょう。' },
       { plholder: 'この月にあったことを2つ~５つなんでも書き出そう' },
-    ]
+    ],
+    effort:{},
    }
- }
+ },
+ mounted () {
+    axios
+      .get(`/api/v1/efforts/${this.$route.params.id}.json`)
+      .then(response => (this.effort = response.data))
+  },
+  methods: {
+    updateEffort: function() {
+      axios
+        .patch(`/api/v1/efforts/${this.effort.id}`, this.effort)
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+  }
 }
 </script>
 

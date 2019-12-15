@@ -22,7 +22,7 @@
               </li>
 
             <li class="content _interest">
-              <router-link to="/focus">
+              <router-link :to="{ name: 'Effort', params: { id: 1 } }">
               <div class="img">
                 <img v-bind:src="require('./packs/images/note_interest.png')">
               </div>
