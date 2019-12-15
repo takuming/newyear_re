@@ -31,8 +31,8 @@ const router = new VueRouter({
     { path: "/focus", component: Focus },
 
     { path: "/setgoal", name: 'Setgoal',component: Setgoal },
-    { path: "/setgoal/new", component: SetgoalNew },
-    { path: "/setgoal/:id(\\d+)/edit'", name: 'SetGoalEdit',component: SetgoalEdit },
+    { path: "/setgoal/new",name: 'SetgoalNew', component: SetgoalNew },
+    { path: "/setgoal/:id(\\d+)",name: 'SetgoalEdit',component: SetgoalEdit },
 
     { path: "/lookback/months/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
     { path: "/lookback/reflection", component: LookbackReflection },

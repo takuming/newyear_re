@@ -1,6 +1,6 @@
 <template>
   <div class="goal_detail">
-    <HeaderNav2></HeaderNav2>
+    <HeaderLb></HeaderLb>
     <div class="note">
       <div class="wrapper">
           <div class="title">
@@ -35,7 +35,6 @@ import axios from 'axios';
 import HeaderLb from "../components/header-lb.vue";
 
 export default {
-  el: '#demo',
   components: {
     HeaderLb
   },
@@ -46,16 +45,13 @@ export default {
  },
  mounted () {
     axios
-      .get(`/api/v1/setgoal/${this.$route.params.id}.json`)
+      .get(`/api/v1/goals/${this.$route.params.id}.json`)
       .then(response => (this.goal = response.data))
   },
   methods:{
    updateGoal: function(){
       axios
       .patch(`/api/v1/goals/${this.goal.id}`, this.goal)
-      .then(response => {
-        this.$router.push({path:'/lookback/month'})
-      })
     }
   },
 }

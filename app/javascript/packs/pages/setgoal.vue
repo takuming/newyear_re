@@ -1,12 +1,12 @@
 <template>
   <div class="setgoal">
-    <HeaderNav2></HeaderNav2>
+    <HeaderLb></HeaderLb>
     <div class="title">
       <p>PHAESE 3</p>
       <h3>目標を設定しよう</h3>
     </div>
     <div class="note">
-      <ul class="goals">
+      <ul v-for="g in goals" :key="g.id" class="goals">
         <li class="item">
           <a href="">
             <div class="wrapper">
@@ -14,6 +14,14 @@
               <div>></div>
             </div>
           </a>
+        </li>
+        <li class="item">
+          <router-link :to="{ name: 'SetgoalEdit', params: { id: g.id } }">
+            <div class="wrapper">
+              <h3 class="title">{{g.title}}</h3>
+              <div>></div>
+            </div>
+          </router-link>
         </li>
       </ul>
       <div class="button make_goal">
@@ -27,11 +35,24 @@
 
 <script>
 
+import axios from 'axios';
+
 import HeaderLb from "../components/header-lb.vue";
 
 export default {
   components: {
     HeaderLb
+  },
+  data: function () {
+    return {
+      goals: [],
+      errors: ''
+    }
+  },
+  mounted(){
+    axios
+      .get('/api/v1/goals.json')
+      .then(response => (this.goals = response.data))
   }
 }
 </script>
