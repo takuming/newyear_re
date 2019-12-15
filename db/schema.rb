@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_021524) do
+ActiveRecord::Schema.define(version: 2019_12_15_034441) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 2019_12_15_021524) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lbcuriosities", force: :cascade do |t|
+    t.text "trance"
+    t.text "positive"
+    t.text "interesting"
+    t.text "comfortable"
+    t.text "theme"
+    t.text "investment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lbmonths", force: :cascade do |t|
     t.text "jan"
     t.text "feb"
@@ -58,6 +69,18 @@ ActiveRecord::Schema.define(version: 2019_12_15_021524) do
     t.text "oct"
     t.text "nov"
     t.text "dec"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lbreflections", force: :cascade do |t|
+    t.text "missing"
+    t.text "taking"
+    t.text "worry"
+    t.text "guilt"
+    t.text "anger"
+    t.text "sorrow"
+    t.text "jealousy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

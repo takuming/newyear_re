@@ -33,6 +33,7 @@
               </div>
               </router-link>
             </li>
+            
             <li class="content _goalset">
               <router-link to="/setgoal">
               <div class="img">

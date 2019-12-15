@@ -1,0 +1,2 @@
+class Lbreflection < ApplicationRecord
+end

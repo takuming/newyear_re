@@ -1,0 +1,2 @@
+class Lbcuriosity < ApplicationRecord
+end

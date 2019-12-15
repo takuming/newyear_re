@@ -7,9 +7,41 @@
     </div>
     <div class="note">
       <ul class="quesitions">
-        <li class="item"  v-for="q in questions">
-          <h3 class="title">Q.{{ q.title }}</h3>
-          <textarea name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        <li class="item">
+          <h3 class="title">Q.今年最も集中できた/夢中になれたこと</h3>
+          <textarea 
+          v-model="curiosity.trance" 
+          v-on:keypress.enter="updateCuriosity" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今年ポジティブに感じた行動は？</h3>
+          <textarea 
+          v-model="curiosity.positive" 
+          v-on:keypress.enter="updateCuriosity" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li  class="item">
+          <h3 class="title">Q.今年面白そうと感じたけどできなかったことは？</h3>
+          <textarea 
+          v-model="curiosity.interesting" 
+          v-on:keypress.enter="updateCuriosity"name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li  class="item">
+          <h3 class="title">Q.今年心地よく感じた瞬間、人、場所は？</h3>
+          <textarea 
+          v-model="curiosity.comfortable" 
+          v-on:keypress.enter="updateCuriosity"name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li  class="item">
+          <h3 class="title">Q.今、好きなだけ時間を使えるなら未来のために何をする？</h3>
+          <textarea 
+          v-model="curiosity.theme" 
+          v-on:keypress.enter="updateCuriosity"name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li  class="item">
+          <h3 class="title">Q.今、深掘りしてみたいテーマはありますか？</h3>
+          <textarea 
+          v-model="curiosity.investment" 
+          v-on:keypress.enter="updateCuriosity"name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
         </li>
       </ul>
     </div>
@@ -17,6 +49,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 import HeaderLb from "../components/header-lb.vue";
 
@@ -31,9 +64,27 @@ export default {
       { title: '今年最も時間を使ってしまっていたことは？' },
       { plholder: '能力、時間、感情・・・・・なんでも書き出してみましょう。' },
       { plholder: 'この月にあったことを2つ~５つなんでも書き出そう' },
-    ]
+    ],
+    curiosity:{},
    }
- }
+ },
+ mounted () {
+    axios
+      .get(`/api/v1/lbcuriosities/${this.$route.params.id}.json`)
+      .then(response => (this.curiosity = response.data))
+  },
+  methods: {
+    updateCuriosity: function() {
+      axios
+        .patch(`/api/v1/lbcuriosities/${this.curiosity.id}`, this.curiosity)
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+  }
 }
 </script>
 

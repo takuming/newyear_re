@@ -7,9 +7,47 @@
     </div>
     <div class="note">
       <ul class="quesitions">
-        <li class="item"  v-for="q in questions">
-          <h3 class="title">Q.{{ q.title }}</h3>
-          <textarea name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        <li class="item">
+          <h3 class="title">Q.今年最も欠けていたことはなんですか？</h3>
+          <textarea 
+          v-model="reflection.missing" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今年最も時間を使ってしまっていたことは？</h3>
+          <textarea 
+          v-model="reflection.taking" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今年、仕事の心配なしに遊ぶことはできましたか</h3>
+          <textarea 
+          v-model="reflection.worry" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.罪悪感を感じた瞬間や出来事はありますか</h3>
+          <textarea 
+          v-model="reflection.guilt" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今、好きなだけ怒っていいなら何に対して怒りますか</h3>
+          <textarea 
+          v-model="reflection.anger" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今、あなたの心配事は</h3>
+          <textarea 
+          v-model="reflection.sorrow" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
+        </li>
+        <li class="item">
+          <h3 class="title">Q.今年嫉妬を感じたこと</h3>
+          <textarea 
+          v-model="reflection.jealousy" 
+          v-on:keypress.enter="updateReflection" name="" id="" cols="30" rows="10" placeholder="ここにテキストが入ります"></textarea>
         </li>
       </ul>
     </div>
@@ -17,6 +55,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 import HeaderLb from "../components/header-lb.vue";
 
@@ -31,9 +70,27 @@ export default {
       { title: '今年最も時間を使ってしまっていたことは？' },
       { plholder: '能力、時間、感情・・・・・なんでも書き出してみましょう。' },
       { plholder: 'この月にあったことを2つ~５つなんでも書き出そう' },
-    ]
+    ],
+    reflection:{},
    }
- }
+ },
+ mounted () {
+    axios
+      .get(`/api/v1/lbreflections/${this.$route.params.id}.json`)
+      .then(response => (this.reflection = response.data))
+  },
+  methods: {
+    updateReflection: function() {
+      axios
+        .patch(`/api/v1/lbreflections/${this.reflection.id}`, this.reflection)
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+  }
 }
 </script>
 

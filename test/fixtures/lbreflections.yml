@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  missing: MyText
+  taking: MyText
+  worry: MyText
+  guilt: MyText
+  anger: MyText
+  sorrow: MyText
+  jealousy: MyText
+
+two:
+  missing: MyText
+  taking: MyText
+  worry: MyText
+  guilt: MyText
+  anger: MyText
+  sorrow: MyText
+  jealousy: MyText
