@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  change: MyText
+  keep: MyText
+  challenge: MyText
+  influence: MyText
+  surround: MyText
+  endofyear: MyText
+
+two:
+  change: MyText
+  keep: MyText
+  challenge: MyText
+  influence: MyText
+  surround: MyText
+  endofyear: MyText
