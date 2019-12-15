@@ -74,7 +74,7 @@ export default {
       axios
       .post('/api/v1/lbmonths', this.lbmonths)
       .then(response =>{
-        this.$router.push({path:'/lookback/month'})
+        this.$router.push({ name: 'LookbackMonth', params: { id:1 } });
       })
     },
     createReflection: function(){

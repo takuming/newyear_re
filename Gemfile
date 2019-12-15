@@ -66,3 +66,5 @@ gem 'webpacker', github: 'rails/webpacker'
 gem "jquery-rails"
 
 gem 'activeadmin'
+
+gem 'devise'

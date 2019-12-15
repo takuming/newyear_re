@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   ActiveAdmin.routes(self)
   root to: 'page#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -26,11 +27,6 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :lbcuriosities, only: [:index, :show, :create,:update]
-    end
-  end
-  namespace :api, {format: 'json'} do
-    namespace :v1 do
-      resources :users, only: [:index,:destroy]
     end
   end
   
