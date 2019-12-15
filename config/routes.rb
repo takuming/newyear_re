@@ -29,6 +29,11 @@ Rails.application.routes.draw do
       resources :lbcuriosities, only: [:index, :show, :create,:update]
     end
   end
+  namespace :api, {format: 'json'} do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :create,:update]
+    end
+  end
   
   
 end
