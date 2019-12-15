@@ -22,7 +22,7 @@
               </li>
 
             <li class="content _interest">
-              <router-link :to="{ name: 'Effort', params: { id: 1 } }">
+              <router-link :to="{ name: 'OpEffort'}">
               <div class="img">
                 <img v-bind:src="require('./packs/images/note_interest.png')">
               </div>
@@ -35,7 +35,7 @@
             </li>
             
             <li class="content _goalset">
-              <router-link to="/setgoal">
+              <router-link :to="{ name: 'OpGoal'}">
               <div class="img">
                 <img v-bind:src="require('./packs/images/note_goalset.png')">
               </div>

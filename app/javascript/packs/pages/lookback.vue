@@ -23,7 +23,7 @@
               </a>
             </li>
             <li v-on:click="createReflection">
-              <router-link to="/opening">
+              <a>
                 <div class="left">
                     <p class="step">STEP2.</p>
                     <h3>今年の内省</h3>
@@ -33,8 +33,8 @@
                 </div>
                 <div class="right">
                     <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
-                </div>  
-              </router-link>
+                </div> 
+              </a>
             </li>
             <li v-on:click="createLbcuriosity">
               <a>
@@ -74,21 +74,21 @@ export default {
       axios
       .post('/api/v1/lbmonths', this.lbmonths)
       .then(response =>{
-        this.$router.push({path:'/lookback/month'})
+        this.$router.push({ name: 'OpMonth'})
       })
     },
     createReflection: function(){
       axios
       .post('/api/v1/lbreflections', this.lbreflections)
       .then(response =>{
-        this.$router.push({ name: 'Reflection', params: { id:1 } });
+        this.$router.push({ name: 'OpReflection'});
       })
     },
     createLbcuriosity: function(){
       axios
       .post('/api/v1/lbcuriosities', this.lbcuriosities)
       .then(response =>{
-        this.$router.push({ name: 'Curiosity', params: { id:1 } });
+        this.$router.push({ name: 'OpCuriosity' });
       })
     },
   }
