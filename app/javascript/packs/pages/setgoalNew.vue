@@ -1,6 +1,14 @@
 <template>
   <div class="goal_detail">
-    <HeaderNav2></HeaderNav2>
+    <HeaderLb></HeaderLb>
+    <button type="submit">保存</button>
+    <div v-if="errors.length != 0">
+      <ul v-for="e in errors" :key="e">
+        <li><font color="red">{{ e }}</font></li>
+      </ul>
+    </div>
+
+    <form @submit.prevent="createGoal">
     <div class="note">
       <div class="wrapper">
           <div class="title">
@@ -24,6 +32,7 @@
           </div>
         </div>
     </div>
+    </form>
     
   </div>
   
@@ -35,7 +44,6 @@ import axios from 'axios';
 import HeaderLb from "../components/header-lb.vue";
 
 export default {
-  el: '#demo',
   components: {
     HeaderLb
   },
@@ -45,22 +53,24 @@ export default {
        title:'',
        action:'',
        problem:''
-     }
+     },
+     errors:''
    }
  },
- mounted () {
-    axios
-      .get('/api/v1/goals.json')
-      .then(response => (this.goal = response.data))
-  },
   methods:{
     createGoal: function(){
       axios
       .post('/api/v1/goals', this.goal)
       .then(response => {
         let g = response.data;
-        this.$router.push({name: 'SetGoalEdit', params:{id: g.id}})
+        this.$router.push({name: 'SetgoalEdit', params:{id: g.id}})
       })
+      .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
     }
   },
 }
