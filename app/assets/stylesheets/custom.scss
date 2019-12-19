@@ -1,4 +1,34 @@
-// jq_modal
+@mixin title-fs-XL {
+  font-size:48px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+@mixin title-fs-L {
+  font-size:40px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+@mixin title-fs-M {
+  font-size:32px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+@mixin normal-fs {
+  font-size:14px;
+  line-height: 1.4;
+}
+@mixin cv-button {
+  padding:20px;
+  background-color: #000;
+  border-radius: 200px;
+  color: white;
+  text-decoration: none;
+  font-size:14px;
+  line-height: 1;
+}
+
+// モーダル jq_modal
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -29,4 +59,143 @@
   top: 50%;
   transform: translate(-50%,-50%);
   width: 60%;
+}
+
+
+//****** 全体
+.wrapper{
+
+}
+
+//****** ヘッダー
+header{
+  width: 100%;
+  height: 88px;
+  img{
+    width: 100%;
+    height: auto;
+    width: 250px;
+    height: 72px;
+    margin: 0 auto;
+  }
+}
+
+//****** トップ
+.main {
+  width: 1080px;
+  margin: 0 auto;
+  display:flex;
+  justify-content: space-between;
+  background-image: url(./images/main_bg.jpg);
+	.left {
+    h1{
+      @include title-fs-XL;
+    }
+    p{
+      @include normal-fs;
+    }
+		.registerbutton {
+			.content {
+        padding: 0;
+				.js-modal-open {
+          @include cv-button();
+				}
+			}
+		}
+	}
+	.right {
+    width: 48%;
+		.siteimg {
+      width: 1020px;
+      height: 680px;
+      background-color: #dadbdd;
+      border-radius: 8px;
+      position: relative;
+
+      img{
+        width: 100%;
+      }
+		}
+	}
+}
+
+//****** ステートメント
+.statement {
+  padding: 220px 96px;
+	.wrapper {
+    width: 72%;
+    padding:64px;
+    background-color:#000;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    h2{
+      color:#FFF;
+      @include title-fs-M;
+    }
+		.divider {
+      color: #F1F38E
+    }
+    p{
+      width: 672px;
+      margin: 0 auto;
+      text-align: left;
+      @include normal-fs;
+      font-weight: bold;
+      letter-spacing: 4px;
+      line-height: 2.4;
+    }
+	}
+}
+
+//****** 使い方
+.howtouse {
+  width: 1240px;
+  margin: 0 auto;
+	.title {
+    p{
+      @include normal-fs;
+    }
+    h2{
+      @include title-fs-L;
+    }
+	}
+	.phase {
+		.wrapper {
+      display:flex;
+      justify-content: space-between;
+      background-color:#dadbdd;
+			.left {
+        h3{
+          @include title-fs-M;
+        }
+        p{
+          @include normal-fs;
+        }
+			}
+			.right {
+				.siteimg {
+				}
+			}
+		}
+  }
+  .phase.first {}
+  .phase.second {}
+  .phase.third {}
+}
+
+//****** 登録
+.register {
+	.wrapper {
+    h3{
+      @include title-fs-L;
+    }
+		.regibutton {
+			.content {
+				.js-modal-open {
+          @include cv-button();
+				}
+			}
+		}
+	}
 }
