@@ -7,7 +7,7 @@ class Api::V1::LbmonthsController < ApiController
   end
 
   def index
-    lbmonths = Lbmonth.all
+    lbmonths = Lbmonth.where(user: current_user)
     render json: lbmonths
   end
 

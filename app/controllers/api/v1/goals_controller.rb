@@ -16,6 +16,7 @@ class Api::V1::GoalsController < ApiController
   end
 
   def create
+
    goal = Goal.new(goal_params)
     if goal.save
       render json: goal, status: :created
@@ -44,7 +45,7 @@ class Api::V1::GoalsController < ApiController
     end
 
     def goal_params
-      params.fetch(:goal, {}).permit(:title, :action, :problem)
+      params.fetch(:goal, {}).permit(:title, :action, :problem).merge({ user: current_user })
     end
 
     def render_status_404(exception)
