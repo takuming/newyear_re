@@ -16,7 +16,7 @@ class Api::V1::LbreflectionsController < ApiController
   end
 
   def create
-    lbreflection = Lbreflection.new(lbcuriosity_params)
+    lbreflection = Lbreflection.new(lbreflection_params)
     if lbreflection.save
       render json: lbreflection, status: :created
     else
