@@ -1,5 +1,6 @@
 class Api::V1::LbmonthsController < ApiController
   before_action :set_lbmonth, only: [:show, :update]
+  before_action :correct_user, only: [:index,:show,:update]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -39,6 +40,14 @@ class Api::V1::LbmonthsController < ApiController
     end
 
     def lbmonth_params
-      params.fetch(:lbmonth, {}).permit(:jan,:feb,:mar,:apr,:may,:jun,:jul,:aug,:sep,:oct,:nov,:dec)
+      params.fetch(:lbmonth, {}).permit(:jan,:feb,:mar,:apr,:may,:jun,:jul,:aug,:sep,:oct,:nov,:dec).merge({ user: current_user })
     end
+
+    def correct_user
+      lbmonth = Lbmonth.find(params[:id])
+      if current_user != lbmonth.user
+        redirect_to :root
+      end
+    end
+
 end

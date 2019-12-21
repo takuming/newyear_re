@@ -1,6 +1,6 @@
 <template>
   <div class="goal_detail">
-    <HeaderLb></HeaderLb>
+    <HeaderGoal></HeaderGoal>
     <div class="note">
       <div class="wrapper">
           <div class="title">
@@ -32,11 +32,11 @@
 <script>
 import axios from 'axios';
 
-import HeaderLb from "../components/header-lb.vue";
+import HeaderGoal from "../components/header-goal.vue";
 
 export default {
   components: {
-    HeaderLb
+    HeaderGoal
   },
   data: function (){
    return {

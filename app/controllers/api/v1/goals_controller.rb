@@ -1,5 +1,6 @@
 class Api::V1::GoalsController < ApiController
   before_action :set_goal, only: [:show,:update, :destroy]
+  before_action :correct_user, only: [:show,:update]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -7,7 +8,7 @@ class Api::V1::GoalsController < ApiController
   end
 
   def index
-    goals = Goal.all
+    goals = Goal.where(user: current_user).order("created_at ASC")
     render json: goals
   end
 
@@ -46,6 +47,13 @@ class Api::V1::GoalsController < ApiController
 
     def goal_params
       params.fetch(:goal, {}).permit(:title, :action, :problem).merge({ user: current_user })
+    end
+
+    def correct_user
+      goal = Goal.find(params[:id])
+      if current_user != goal.user
+        redirect_to :root
+      end
     end
 
     def render_status_404(exception)
