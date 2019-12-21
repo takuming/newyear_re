@@ -21,8 +21,20 @@ import LookbackCuriosity from "./packs/pages/curiosity.vue";
 import Setgoal from "./packs/pages/setgoal.vue";
 import SetgoalNew from "./packs/pages/setgoalNew.vue";
 import SetgoalEdit from "./packs/pages/setgoalEdit.vue";
+
 import Opening from "./packs/components/opening.vue";
+import OpMonth from "./packs/components/op/month-op.vue";
+import OpReflection from "./packs/components/op/reflection-op.vue";
+import OpCuriosity from "./packs/components/op/curiosity-op.vue";
+import OpEffort from "./packs/components/op/effort-op.vue";
+import OpGoal from "./packs/components/op/goal-op.vue";
+
 import Intro from "./packs/components/intro.vue";
+import IntroMonth from "./packs/components/op/month-intr.vue";
+import IntroReflection from "./packs/components/op/reflection-intr.vue";
+import IntroCuriosity from "./packs/components/op/curiosity-intr.vue";
+import IntroEffort from "./packs/components/op/effort-intr.vue";
+import IntroGoal from "./packs/components/op/goal-intr.vue";
 
 const router = new VueRouter({
   routes: [
@@ -34,12 +46,23 @@ const router = new VueRouter({
     { path: "/setgoal/new",name: 'SetgoalNew', component: SetgoalNew },
     { path: "/setgoal/:id(\\d+)",name: 'SetgoalEdit',component: SetgoalEdit },
 
-    { path: "/lookback/months/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
+    { path: "/lookback/month/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
     { path: "/lookback/reflection/:id(\\d+)",name:'Reflection', component: LookbackReflection },
     { path: "/lookback/curiosity/:id(\\d+)",name:'Curiosity', component: LookbackCuriosity },
 
-    { path: "/opening", component: Opening },
-    { path: "/intro", component: Intro },
+    { path: "/opening", name:'Opening',component: Opening },
+    { path: "/opening/month", name:'OpMonth',component: OpMonth },
+    { path: "/opening/reflection", name:'OpReflection',component: OpReflection },
+    { path: "/opening/curiosity", name:'OpCuriosity',component: OpCuriosity },
+    { path: "/opening/effort", name:'OpEffort',component: OpEffort },
+    { path: "/opening/goal", name:'OpGoal',component: OpGoal },
+
+    { path: "/intro", name:'Intro', component: Intro },
+    { path: "/intro/month", name:'IntroMonth', component: IntroMonth },
+    { path: "/intro/reflection", name:'IntroReflection', component: IntroReflection },
+    { path: "/intro/curiosity", name:'IntroCuriosity', component: IntroCuriosity },
+    { path: "/intro/effort", name:'IntroEffort', component: IntroEffort },
+    { path: "/intro/goal", name:'IntroGoal', component: IntroGoal },
   ]
 });
 
