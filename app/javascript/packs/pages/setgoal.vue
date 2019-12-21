@@ -1,6 +1,6 @@
 <template>
   <div class="setgoal">
-    <HeaderLb></HeaderLb>
+    <HeaderIndex></HeaderIndex>
     <div class="title">
       <p>PHAESE 3</p>
       <h3>目標を設定しよう</h3>
@@ -34,11 +34,11 @@
 import axios from 'axios';
 
 import Modal from "../components/modal.vue";
-import HeaderLb from "../components/header-lb.vue";
+import HeaderIndex from "../components/header-index.vue";
 
 export default {
   components: {
-    HeaderLb,
+    HeaderIndex,
     Modal
   },
   data: function () {
