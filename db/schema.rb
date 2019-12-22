@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_21_020123) do
+ActiveRecord::Schema.define(version: 2019_12_22_122446) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -35,6 +35,10 @@ ActiveRecord::Schema.define(version: 2019_12_21_020123) do
     t.text "endofyear"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id_id"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_efforts_on_user_id"
+    t.index ["user_id_id"], name: "index_efforts_on_user_id_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -56,6 +60,10 @@ ActiveRecord::Schema.define(version: 2019_12_21_020123) do
     t.text "investment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "user_id_id"
+    t.index ["user_id"], name: "index_lbcuriosities_on_user_id"
+    t.index ["user_id_id"], name: "index_lbcuriosities_on_user_id_id"
   end
 
   create_table "lbmonths", force: :cascade do |t|
@@ -89,6 +97,10 @@ ActiveRecord::Schema.define(version: 2019_12_21_020123) do
     t.text "jealousy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "user_id_id"
+    t.index ["user_id"], name: "index_lbreflections_on_user_id"
+    t.index ["user_id_id"], name: "index_lbreflections_on_user_id_id"
   end
 
   create_table "users", force: :cascade do |t|

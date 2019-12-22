@@ -40,15 +40,15 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: Index },
     { path: "/lookback", component: Lookback },
-    { path: "/efforts/:id(\\d+)", name: 'Effort',component: Effort },
+    { path: "/efforts/:user_id/:id(\\d+)", name: 'Effort',component: Effort },
 
     { path: "/setgoal", name: 'Setgoal',component: Setgoal },
     { path: "/setgoal/new",name: 'SetgoalNew', component: SetgoalNew },
     { path: "/setgoal/:id(\\d+)",name: 'SetgoalEdit',component: SetgoalEdit },
 
-    { path: "/lookback/month/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
-    { path: "/lookback/reflection/:id(\\d+)",name:'Reflection', component: LookbackReflection },
-    { path: "/lookback/curiosity/:id(\\d+)",name:'Curiosity', component: LookbackCuriosity },
+    { path: "/lookback/month/:user_id/:id(\\d+)",name: 'LookbackMonth', component: LookbackMonth },
+    { path: "/lookback/reflection/:user_id/:id(\\d+)",name:'Reflection', component: LookbackReflection },
+    { path: "/lookback/curiosity/:user_id/:id(\\d+)",name:'Curiosity', component: LookbackCuriosity },
 
     { path: "/opening", name:'Opening',component: Opening },
     { path: "/opening/month", name:'OpMonth',component: OpMonth },

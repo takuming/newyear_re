@@ -51,6 +51,59 @@
               </a>
             </li>
           </ul>
+
+          <!-- テスト一覧を取得する -->
+          <ul v-for="m in lbmonths" :key="m.id" class="lbmonths">
+              <li>
+                  <router-link  :to="{ name: 'LookbackMonth', params: { user_id:m.user_id, id:m.id } }">
+                      <div class="left">
+                        <p class="step">STEP1.</p>
+                        <h3>{{m.jan}}{{m.user_id}}</h3>
+                        <p class="direct">
+                          <router-link to="/month">直接ノートに行く</router-link>
+                        </p>
+                      </div>
+                      <div class="right">
+                        <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                      </div>    
+                  </router-link>
+              </li>
+          </ul> 
+
+          <ul v-for="r in lbreflections" :key="r.id" class="lbreflections">
+              <li>
+                  <router-link  :to="{ name: 'Reflection', params: { user_id:r.user_id, id:r.id } }">
+                      <div class="left">
+                        <p class="step">STEP2.</p>
+                        <h3>{{r.missing}}{{r.user_id}} 内省</h3>
+                        <p class="direct">
+                          <router-link to="/month">直接ノートに行く</router-link>
+                        </p>
+                      </div>
+                      <div class="right">
+                        <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                      </div>    
+                  </router-link>
+              </li>
+          </ul>
+
+          <ul v-for="c in lbcuriosities" :key="c.id" class="lbcuriosities">
+              <li>
+                  <router-link  :to="{ name: 'Curiosity', params: { user_id:c.user_id, id:c.id } }">
+                      <div class="left">
+                        <p class="step">STEP3.</p>
+                        <h3>{{c.trance}}{{c.user_id}} 好奇心</h3>
+                        <p class="direct">
+                          <router-link to="/month">直接ノートに行く</router-link>
+                        </p>
+                      </div>
+                      <div class="right">
+                        <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                      </div>    
+                  </router-link>
+              </li>
+          </ul>
+          
       </div>
     </div>
   </transition>
@@ -66,8 +119,22 @@ export default {
   },
   data: function() {
     return {
+      lbmonths:[],
+      lbreflections:[],
+      lbcuriosities:[],
       message: ""
-    };
+    }
+  },
+  mounted(){
+    axios
+      .get('/api/v1/lbreflections.json')
+      .then(response => (this.lbreflections = response.data));
+    axios
+      .get('/api/v1/lbmonths.json')
+      .then(response => (this.lbmonths = response.data));
+    axios
+      .get('/api/v1/lbcuriosities.json')
+      .then(response => (this.lbcuriosities = response.data))
   },
   methods: {
     createLbmonth: function(){

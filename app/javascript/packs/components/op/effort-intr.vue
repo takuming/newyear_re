@@ -25,7 +25,12 @@
             負の側面からじぶんを知っていきましょう
           </div>
           <div class="button">
-            <router-link to="/efforts/1">
+            <router-link  :to="{ name: 'Effort', params: { user_id:effort.user_id, id:effort.id } }">
+            <p>移動するよ</p>
+            </router-link>
+          </div>
+          <div  v-for="e in effort" :key="e.id" class="button">
+            <router-link  :to="{ name: 'Effort', params: { user_id:e.user_id, id:e.id } }">
             <p>移動するよ</p>
             </router-link>
           </div>
@@ -38,13 +43,21 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   el: '#demo',
   data() {
     return {
-      show:true
+      effort:[],
+      show:true,
     }
   },
+  mounted(){
+    axios
+      .get('/api/v1/efforts.json')
+      .then(response => (this.effort = response.data));
+  }
 }
 </script>
 
