@@ -1,5 +1,6 @@
 class Api::V1::LbcuriositiesController < ApiController
   before_action :set_lbcuriosity, only: [:show, :update]
+  before_action :correct_user, only: [:show,:update]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -39,6 +40,14 @@ class Api::V1::LbcuriositiesController < ApiController
     end
 
     def lbcuriosity_params
-      params.fetch(:lbcuriosity, {}).permit(:trance, :positive ,:interesting, :comfortable, :theme, :investment).merge({ user: current_user })
+      params.fetch(:lbcuriosity, {}).permit(:trance, :positive ,:interesting, :comfortable, :theme, :investment).merge({ user: current_user }).merge({ user: current_user })
     end
+
+    def correct_user
+      lbcuriosity = Lbcuriosity.find(params[:id])
+      if current_user != lbcuriosity.user
+        redirect_to :root
+      end
+    end
+
 end

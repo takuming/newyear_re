@@ -1,5 +1,6 @@
 class Api::V1::LbreflectionsController < ApiController
   before_action :set_lbreflection, only: [:show, :update]
+  before_action :correct_user, only: [:show,:update]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -41,5 +42,12 @@ class Api::V1::LbreflectionsController < ApiController
 
     def lbreflection_params
       params.fetch(:lbreflection, {}).permit(:missing, :taking, :worry, :guilt, :anger, :sorrow, :jealousy).merge({ user: current_user })
+    end
+
+    def correct_user
+      lbreflection = Lbreflection.find(params[:id])
+      if current_user != lbreflection.user
+        redirect_to :root
+      end
     end
 end
