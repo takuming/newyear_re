@@ -47,6 +47,20 @@
               </router-link>
             </li>
           </ul>
+          <ul >
+              <li v-on:click="createEffort">
+                  <router-link  :to="{ name: 'OpEffort' }">
+                      <div class="img">
+                        <img v-bind:src="require('./packs/images/note_interest.png')">
+                      </div>
+                      <div class="text">
+                        <span>PHASE 2</span>
+                        <h3>今の自分を整理する</h3>
+                        <p>変えたいこと、挑戦したいこと。今の自分がうっすらと感じていることを明らかにします。</p>
+                      </div>
+                  </router-link>
+              </li>
+          </ul>
         </div>
     </div>
     <div>
@@ -70,10 +84,26 @@ export default {
   },
   data: function() {
     return {
+      effort:[],
       message: "",
       info:null,
     };
-  }
+  },
+  methods:{
+    createEffort: function(){
+      axios
+      .post('/api/v1/efforts', this.effort)
+      .then(response => {
+        this.$router.push({name: 'OpEffort'})
+      })
+      .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    }
+  },
 };
 </script>
 

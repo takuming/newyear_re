@@ -40,7 +40,7 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: Index },
     { path: "/lookback", component: Lookback },
-    { path: "/efforts/:id(\\d+)", name: 'Effort',component: Effort },
+    { path: "/efforts/:user_id/:id(\\d+)", name: 'Effort',component: Effort },
 
     { path: "/setgoal", name: 'Setgoal',component: Setgoal },
     { path: "/setgoal/new",name: 'SetgoalNew', component: SetgoalNew },
