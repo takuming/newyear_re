@@ -1,6 +1,6 @@
 class Api::V1::LbmonthsController < ApiController
   before_action :set_lbmonth, only: [:show, :update]
-  before_action :correct_user, only: [:index,:show,:update]
+  before_action :correct_user, only: [:show,:update]
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -8,7 +8,7 @@ class Api::V1::LbmonthsController < ApiController
   end
 
   def index
-    lbmonths = Lbmonth.where(user: current_user)
+    lbmonths = Lbmonth.where(user: current_user).order("created_at ASC").limit(1)
     render json: lbmonths
   end
 

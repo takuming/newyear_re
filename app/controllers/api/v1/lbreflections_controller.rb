@@ -7,7 +7,7 @@ class Api::V1::LbreflectionsController < ApiController
   end
 
   def index
-    lbreflections = Lbreflection.all
+    lbreflections = Lbreflection.where(user: current_user).order("created_at ASC").limit(1)
     render json: lbreflections
   end
 
@@ -40,6 +40,6 @@ class Api::V1::LbreflectionsController < ApiController
     end
 
     def lbreflection_params
-      params.fetch(:lbreflection, {}).permit(:missing, :taking, :worry, :guilt, :anger, :sorrow, :jealousy)
+      params.fetch(:lbreflection, {}).permit(:missing, :taking, :worry, :guilt, :anger, :sorrow, :jealousy).merge({ user: current_user })
     end
 end

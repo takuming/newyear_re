@@ -7,7 +7,7 @@ class Api::V1::LbcuriositiesController < ApiController
   end
 
   def index
-    lbcuriosities = Lbcuriosity.all
+    lbcuriosities = Lbcuriosity.where(user: current_user).order("created_at ASC").limit(1)
     render json: lbcuriosities
   end
 
@@ -39,6 +39,6 @@ class Api::V1::LbcuriositiesController < ApiController
     end
 
     def lbcuriosity_params
-      params.fetch(:lbcuriosity, {}).permit(:trance, :positive ,:interesting, :comfortable, :theme, :investment)
+      params.fetch(:lbcuriosity, {}).permit(:trance, :positive ,:interesting, :comfortable, :theme, :investment).merge({ user: current_user })
     end
 end

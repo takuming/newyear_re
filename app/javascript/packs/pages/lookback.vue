@@ -51,6 +51,24 @@
               </a>
             </li>
           </ul>
+
+          <!-- テスト一覧を取得する -->
+          <ul v-for="m in lbmonths" :key="m.id" class="lbmonths">
+              <li>
+                  <router-link  :to="{ name: 'LookbackMonth', params: { user_id:m.user_id, id:m.id } }">
+                      <div class="left">
+                        <p class="step">STEP1.</p>
+                        <h3>{{m.jan}}{{m.user_id}}</h3>
+                        <p class="direct">
+                          <router-link to="/month">直接ノートに行く</router-link>
+                        </p>
+                      </div>
+                      <div class="right">
+                        <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
+                      </div>    
+                  </router-link>
+              </li>
+          </ul>
       </div>
     </div>
   </transition>
@@ -66,8 +84,14 @@ export default {
   },
   data: function() {
     return {
+      lbmonths:[],
       message: ""
-    };
+    }
+  },
+  mounted(){
+    axios
+      .get('/api/v1/lbmonths.json')
+      .then(response => (this.lbmonths = response.data))
   },
   methods: {
     createLbmonth: function(){
