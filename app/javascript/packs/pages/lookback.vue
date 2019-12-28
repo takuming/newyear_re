@@ -7,61 +7,13 @@
           <p class="items">PHASE 1</p>
           <h2>今年を振り返る</h2>
         </div>
-        <ul>
-            <li v-on:click="createLbmonth">
-              <a>
-                  <div class="left">
-                    <p class="step">STEP1.</p>
-                    <h3>月を振り返る</h3>
-                    <p class="direct">
-                      <router-link to="/month">直接ノートに行く</router-link>
-                    </p>
-                  </div>
-                  <div class="right">
-                    <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
-                  </div>    
-              </a>
-            </li>
-            <li v-on:click="createReflection">
-              <a>
-                <div class="left">
-                    <p class="step">STEP2.</p>
-                    <h3>今年の内省</h3>
-                    <p class="direct">
-                      <router-link to="/month">直接ノートに行く</router-link>
-                    </p>
-                </div>
-                <div class="right">
-                    <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
-                </div> 
-              </a>
-            </li>
-            <li v-on:click="createLbcuriosity">
-              <a>
-                <div class="left">
-                    <p class="step">STEP3.</p>
-                    <h3>今年の発見</h3>
-                    <p class="direct">
-                      <router-link to="/month">直接ノートに行く</router-link>
-                    </p>
-                </div>
-                <div class="right">
-                    <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
-                </div>  
-              </a>
-            </li>
-          </ul>
-
           <!-- テスト一覧を取得する -->
           <ul v-for="m in lbmonths" :key="m.id" class="lbmonths">
               <li>
                   <router-link  :to="{ name: 'LookbackMonth', params: { user_id:m.user_id, id:m.id } }">
                       <div class="left">
                         <p class="step">STEP1.</p>
-                        <h3>{{m.jan}}{{m.user_id}}</h3>
-                        <p class="direct">
-                          <router-link to="/month">直接ノートに行く</router-link>
-                        </p>
+                        <h3>月ごとに振り返る</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -75,10 +27,7 @@
                   <router-link  :to="{ name: 'Reflection', params: { user_id:r.user_id, id:r.id } }">
                       <div class="left">
                         <p class="step">STEP2.</p>
-                        <h3>{{r.missing}}{{r.user_id}} 内省</h3>
-                        <p class="direct">
-                          <router-link to="/month">直接ノートに行く</router-link>
-                        </p>
+                        <h3>今年の内省</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -92,10 +41,7 @@
                   <router-link  :to="{ name: 'Curiosity', params: { user_id:c.user_id, id:c.id } }">
                       <div class="left">
                         <p class="step">STEP3.</p>
-                        <h3>{{c.trance}}{{c.user_id}} 好奇心</h3>
-                        <p class="direct">
-                          <router-link to="/month">直接ノートに行く</router-link>
-                        </p>
+                        <h3>今年の発見</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -141,21 +87,21 @@ export default {
       axios
       .post('/api/v1/lbmonths', this.lbmonths)
       .then(response =>{
-        this.$router.push({ name: 'OpMonth'})
+        this.$router.push({ name: 'LookbackMonth', params: { user_id:m.user_id, id:m.id } })
       })
     },
     createReflection: function(){
       axios
       .post('/api/v1/lbreflections', this.lbreflections)
       .then(response =>{
-        this.$router.push({ name: 'OpReflection'});
+        this.$router.push({ name: 'Reflection', params: { user_id:r.user_id, id:r.id } });
       })
     },
     createLbcuriosity: function(){
       axios
       .post('/api/v1/lbcuriosities', this.lbcuriosities)
       .then(response =>{
-        this.$router.push({ name: 'OpCuriosity' });
+        this.$router.push({ name: 'Curiosity', params: { user_id:c.user_id, id:c.id } });
       })
     },
   }

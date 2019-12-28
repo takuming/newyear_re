@@ -9,7 +9,7 @@
         <div class="section_contents">
           <ul class="content_wrapper">
               <li class="content _lookback">
-              <router-link to="/lookback">
+              <router-link :to="{name:'OpMonth'}">
                 <div class="img">
                   <img v-bind:src="require('./packs/images/note_lookback.png')">
                 </div>
@@ -21,8 +21,8 @@
               </router-link>
               </li>
 
-            <li class="content _interest">
-              <router-link :to="{ name: 'OpEffort'}">
+            <li v-for="e in effort" :key="e.id"  v-on:click="createEffort" class="content _interest">
+              <router-link :to="{ name: 'Effort', params: { user_id:e.user_id, id:e.id } }">
               <div class="img">
                 <img v-bind:src="require('./packs/images/note_interest.png')">
               </div>
@@ -46,20 +46,6 @@
               </div>
               </router-link>
             </li>
-          </ul>
-          <ul >
-              <li v-on:click="createEffort">
-                  <router-link  :to="{ name: 'OpEffort' }">
-                      <div class="img">
-                        <img v-bind:src="require('./packs/images/note_interest.png')">
-                      </div>
-                      <div class="text">
-                        <span>PHASE 2</span>
-                        <h3>今の自分を整理する</h3>
-                        <p>変えたいこと、挑戦したいこと。今の自分がうっすらと感じていることを明らかにします。</p>
-                      </div>
-                  </router-link>
-              </li>
           </ul>
         </div>
     </div>
@@ -89,12 +75,17 @@ export default {
       info:null,
     };
   },
+   mounted(){
+    axios
+      .get('/api/v1/efforts.json')
+      .then(response => (this.effort = response.data));
+  },
   methods:{
     createEffort: function(){
       axios
       .post('/api/v1/efforts', this.effort)
       .then(response => {
-        this.$router.push({name: 'OpEffort'})
+        this.$router.push({ name: 'Effort', params: { user_id:e.user_id, id:e.id } })
       })
       .catch(error => {
           console.error(error);
