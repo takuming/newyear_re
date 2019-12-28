@@ -6,7 +6,7 @@
             <div class="sec-first">
               <div class="title">
                 <p>INTRODUCTION</p>
-                <h3>今年の内省リスト</h3>
+                <h3>今年をふりかえり</h3>
               </div>
             </div>
       </div> 
@@ -25,7 +25,7 @@ export default {
   mounted () {
       setTimeout(
             function() {
-              this.$router.push({path:'/intro/month'})
+              this.$router.push({path:'/lookback'})
             }.bind(this),
             2000
           );

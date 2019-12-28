@@ -26,7 +26,7 @@ export default {
   mounted () {
       setTimeout(
             function() {
-              this.$router.push({path:'/intro/goal'})
+              this.$router.push({path:'/setgoal'})
             }.bind(this),
             2000
           );
