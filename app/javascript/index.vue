@@ -7,7 +7,7 @@
           <h2>3つのノートを用意しました</h2>
         </div>
         <div class="section_contents">
-          <ul class="content_wrapper">
+          <ul v-on:click="createLookback"  class="content_wrapper">
               <li class="content _lookback">
               <router-link :to="{name:'OpMonth'}">
                 <div class="img">
@@ -21,7 +21,7 @@
               </router-link>
               </li>
 
-            <li v-for="e in effort" :key="e.id"  v-on:click="createEffort" class="content _interest">
+            <li v-for="e in effort" :key="e.id"  class="content _interest">
               <router-link :to="{ name: 'Effort', params: { user_id:e.user_id, id:e.id } }">
               <div class="img">
                 <img v-bind:src="require('./packs/images/note_interest.png')">
@@ -79,20 +79,20 @@ export default {
     axios
       .get('/api/v1/efforts.json')
       .then(response => (this.effort = response.data));
-  },
-  methods:{
-    createEffort: function(){
       axios
       .post('/api/v1/efforts', this.effort)
       .then(response => {
-        this.$router.push({ name: 'Effort', params: { user_id:e.user_id, id:e.id } })
+        this.$router.push({ name: 'Index'})
       })
-      .catch(error => {
-          console.error(error);
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
+  },
+  methods:{
+    createLookback: function(){
+      axios
+      .post('/api/v1/lbmonths', this.lbmonths);
+      axios
+      .post('/api/v1/lbreflections', this.lbreflections);
+      axios
+      .post('/api/v1/lbcuriosities', this.lbcuriosities)
     }
   },
 };
