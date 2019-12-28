@@ -38,7 +38,7 @@ import IntroGoal from "./packs/components/op/goal-intr.vue";
 
 const router = new VueRouter({
   routes: [
-    { path: "/", component: Index },
+    { path: "/", name: 'Index',component: Index },
     { path: "/lookback", component: Lookback },
     { path: "/efforts/:user_id/:id(\\d+)", name: 'Effort',component: Effort },
 
