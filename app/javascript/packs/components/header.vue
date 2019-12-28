@@ -7,7 +7,7 @@
           <img v-bind:src="require('../images/ci.svg')" alt="newyear">
           </li>
         <li class="account">
-          <a v-on:click="signOut">アカウント</a> 
+          <a data-method="delete"  href="/users/sign_out">ログアウト</a> 
         </li>
       </ul>
     </nav>
@@ -27,12 +27,6 @@ export default {
     axios
       .get(`/api/v1/users/${this.$route.params.id}.json`)
       .then(response => (this.user = response.data))
-  },
-  methods: {
-    signOut: function() {
-      axios
-      .delete(`/api/v1/users/`)
-    }
   },
 }
 </script>
