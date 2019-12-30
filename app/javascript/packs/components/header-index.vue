@@ -10,7 +10,6 @@
               <p>戻る</p>  
           </router-link>
         </li>
-        <li class="save">保存する</li>
       </ul>
     </nav>
   </header>
@@ -23,9 +22,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./app/javascript/style/_mixin.scss";
+
 .header {
   background: none;
   padding: 20px 32px;
+  position: relative;
+  padding: 10px 32px;
+  height: 88px;
 	.nav {
 		.wrapper {
       display: flex;
@@ -39,9 +43,13 @@ export default {
           text-decoration: none;
           background-color: white;
           border-radius: 100px;
-          padding: 12px 16px 6px;
+          padding: 12px 16px 10px;
           opacity: 0.92;
+          transition: all 0.24s;
           box-shadow: 1px 1px 16px rgba(0,0,0,0.12);
+          &:hover{
+            opacity: 0.64;
+          }
           .icon {
             margin-right: 12px
           }
@@ -52,6 +60,7 @@ export default {
           height: 8px;
           padding: 12px 0;
           }
+          
         }
 				
 			}
@@ -63,5 +72,11 @@ export default {
 			}
 		}
 	}
+}
+
+@include sp{
+  .header {
+    padding: 12px 0px;
+  }
 }
 </style>

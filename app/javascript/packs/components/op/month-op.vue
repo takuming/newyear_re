@@ -5,8 +5,9 @@
         
             <div class="sec-first">
               <div class="title">
-                <p>INTRODUCTION</p>
-                <h3>今年をふりかえり</h3>
+                <p>PHASE1</p>
+                <h3>今年を振り返ろう</h3>
+                <p class="text">今年の自分から発見しよう</p>
               </div>
             </div>
       </div> 
@@ -81,12 +82,13 @@ export default {
       font-size: 12px;
          font-weight: bold;
          @include eng_font;
-         margin-bottom: 4px;
+         margin-bottom: 8px;
          text-align: center;
     }
     h3{
       @include fst-l;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
+      letter-spacing: 3px;
       text-align: center;
     }
 	}

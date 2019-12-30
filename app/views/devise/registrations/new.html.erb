@@ -1,42 +1,45 @@
-<h2>Sign up</h2>
 
-<div class="content">
-    <a class="js-modal-open" href="">クリックでモーダルを表示</a>
-</div>
-<div class="modal js-modal">
-        <div class="modal__bg js-modal-close"></div>
-        <div class="modal__content">
-
-
-           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<header>
+    <div class="logo">
+      <%= image_tag 'logo.svg' %>
     </div>
-  <% end %>
+  </header>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+<div class="login">
+    <div class="content">
+    <h2>おかえりなさい👋</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :メールアドレス %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder:"メールアドレスを入力" %>
+          </div>
 
-<%= render "devise/shared/links" %>
+          <div class="field">
+            <%= f.label :パスワード %><br />
+            <%= f.password_field :password, autocomplete: "current-password",placeholder:"パスワードを入力"  %>
+          </div>
 
-            <p>ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。</p>
-            <a class="js-modal-close" href="">閉じる</a>
-        </div><!--modal__inner-->
-</div><!--modal-->
+          <div class="forget_pass">
+            <%= link_to "パスワードを忘れましたか？", new_password_path(resource_name) %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :ログインを保存 %>
+            </div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.submit "ログインする" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+
+    </div>
+</div>
+
 
 
 <script>

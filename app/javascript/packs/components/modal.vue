@@ -16,10 +16,10 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit('ok')">
+              <button class="modal-default-button ok" @click="$emit('ok')">
                 OK
               </button>
-              <button class="modal-default-button" @click="$emit('cancel')">
+              <button class="modal-default-button delete" @click="$emit('cancel')">
                 Cancel
               </button>
             </slot>
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -77,6 +77,33 @@ export default {
   float: right;
 }
 
+  .modal_delete{
+    .modal-container{
+          width: 320px;
+          padding: 32px 32px 64px;
+          border-radius: 16px;
+      .modal-default-button{
+        background-color: #f3f3f4;
+        font-size: 14px;
+        background: #f3f3f4;
+        background-image: none;
+        border: none;
+        box-shadow: none;
+        text-shadow: none;
+        color: #000;
+        cursor: pointer;
+        padding: 12px 28px;
+        &.ok{}
+        &.delete{
+          background: none;
+          color: #999
+        }
+      }
+    }
+  }
+
+
+
 /*
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
@@ -85,6 +112,7 @@ export default {
  * You can easily play with the modal transition by editing
  * these styles.
  */
+ 
 
 .modal-enter {
   opacity: 0;
