@@ -1,5 +1,26 @@
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
 @mixin title-fs-XL {
-  font-size:48px;
+  font-size:56px;
   font-weight: bold;
   line-height: 1.4;
 }
@@ -27,12 +48,83 @@
   line-height: 1;
 }
 
+h1{
+  color: #000;
+}
+
+// ログインページ
+.login {
+  background-color: #F8F7F5;
+  padding: 64px 0 480px;
+  h2{
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 32px;
+  }
+	.content {
+    padding: 20px;
+    .new_user{
+      width: 480px;
+      margin: 0 auto;
+      .field {
+        margin-bottom: 0px;
+        input{}
+      }
+      .actions {
+        input[type=submit]{
+          margin: 0;
+          width: 100%;
+          &:hover{
+            background-color: #000;
+            opacity: 0.88;
+          }
+        }
+      }
+    }
+    .link_register{
+      text-align: center;
+      margin: 80px auto;
+      a{
+        font-size: 16px;
+      }
+    }
+    .forget_pass{
+      margin: 0px 0 24px;
+    }
+  }
+}
+@include sp{
+  .login{
+    padding: 80px 0 480px;
+  .content {
+    .new_user{
+      .field {
+        input{}
+      }
+      .actions {
+        margin: 20px auto;
+        input[type=submit]{
+          display: block;
+          margin: 20px 0;
+        }
+        input{}
+      }
+    }
+  }
+ }
+}
+
+
+
+
 // モーダル jq_modal
 
 *{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  z-index: 100;
 }
 .content{
   margin: 0 auto;
@@ -50,16 +142,111 @@
   height: 100vh;
   position: absolute;
   width: 100%;
+  margin: 0 auto !important;
 }
 .modal__content{
   background: #fff;
   left: 50%;
-  padding: 40px;
+  padding: 40px 48px;
   position: absolute;
   top: 50%;
   transform: translate(-50%,-50%);
-  width: 60%;
+  width: 40%;
 }
+
+.modal__content{
+      border-radius: 32px;
+      h1{
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        margin: 24px auto 32px;
+      }
+  }
+  .new_user{
+        margin-bottom: 4px;
+        .field{
+          input[type=checkbox] {
+            box-sizing: border-box;
+            padding: 0;
+            height: 20px!important;
+            display: inline-block;
+            float: left;
+            width: 10%!important;
+          }
+          label{
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 4px;
+          }
+          input{
+            width: 100%;
+            height: 48px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color:  #f3f3f4;
+          }
+        }
+        .actions{
+          input[type=submit]{
+            background: #000;
+            border: none;
+            width: 72%;
+            padding: 24px 0;
+            margin: 0px auto 24px;
+            display: block;
+            font-size: 14px;
+          }
+        }
+        .js-modal-close{
+          text-align: center;
+          width: 100%;
+          display: block;
+          font-size: 16px;
+        }
+    }
+    .link_login{
+      a{
+        display: block;
+        text-align: center;
+      }
+    }
+      
+      
+      .js-modal-close{
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+        margin:32px 0 0px 0;
+        &:hover{
+          opacity: 0.88;;
+        }
+      }
+ 
+
+@include sp{
+    .modal__content{
+      left: 2.5%;
+      top: 25%;
+      transform: inherit;
+      width: 320px;
+      padding: 20px;
+      h1{}
+        font-size: 12px
+      }
+      .new_user{
+        .field{
+          margin-bottom: 16px!important;
+        }
+      }
+      a{
+        font-size: 14px;
+      }
+}
+
 
 
 //****** 全体
@@ -70,35 +257,77 @@
 //****** ヘッダー
 header{
   width: 100%;
-  height: 88px;
-  img{
-    width: 100%;
-    height: auto;
-    width: 250px;
-    height: 72px;
+  height: 124px;
+  z-index: 10;
+  background-color: #F8F7F5;
+  .logo{
+    width: 240px;
+    height:70px;
     margin: 0 auto;
+    padding: 25px 0;
+    img{
+      width: 100%;
+      height: auto;
+      width: 250px;
+      height: 72px;
+      margin: 20px auto;
+    }
+  }
+  @include sp{
+    height: 56px;
+    position: relative;
+    background-color: #F8F7F5;
+    .logo{
+      img{
+        width: 196px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
   }
 }
 
 //****** トップ
 .main {
-  width: 1080px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 124px 0 0 0 ;
+  margin: -124px auto 0;
   display:flex;
   justify-content: space-between;
-  background-image: url(./images/main_bg.jpg);
+  background-color: #F8F7F5;
+  background-image: image-url("main_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  padding-bottom: 64px;
+  z-index: 1;
+  overflow: hidden;
+  .wrapper{
+    width: 1080px;
+    margin: 0 auto;
+    margin-top: 48px;
+  }
 	.left {
     h1{
       @include title-fs-XL;
     }
     p{
       @include normal-fs;
+      line-height: 2;
     }
 		.registerbutton {
+      text-align: center;
 			.content {
         padding: 0;
 				.js-modal-open {
           @include cv-button();
+          font-weight: bold;
+          width: 348px;
+          padding: 30px;
+          display: block;
+          &:hover{
+            opacity: 0.88;;
+          }
 				}
 			}
 		}
@@ -108,50 +337,126 @@ header{
 		.siteimg {
       width: 1020px;
       height: 680px;
-      background-color: #dadbdd;
       border-radius: 8px;
       position: relative;
 
       img{
-        width: 100%;
+        width: 1180px;
+        border-radius: 48px;
+        box-shadow: 1px 1px 16px rgba(0,0,0,0.08);
       }
 		}
-	}
+  }
+  @include sp{
+    margin-top: 0px;
+    display: block;
+    padding: 72px 0 0 0 ;
+    .wrapper{
+      width: 88%;
+      .left{}
+      .right{
+        display: none;
+      }
+    }
+  }
+  @include sp{
+    margin-top: 0px;
+    display: block;
+    padding: 72px 0 137px 0;
+    background-position: -48px 436px;
+    background-size: 300%;
+    .wrapper{
+      width: 88%;
+       margin-top: 24px;
+      .left{
+        float: none!important;
+        h1{
+          font-size: 36px;
+        }
+        p{}
+        .registerbutton{
+          .js-modal-open{
+            width: auto;
+          }
+        }
+      }
+      .right{
+        display: none;
+        .siteimg {
+          .img{}
+        }
+      }
+    }
+  }
 }
 
 //****** ステートメント
 .statement {
   padding: 220px 96px;
+  z-index: 1;
 	.wrapper {
     width: 72%;
-    padding:64px;
-    background-color:#000;
+    padding:88px 64px;
+    background-color:#1f1f1f;
+  background-image: image-url("statement_bg.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
     margin: 0 auto;
     text-align: center;
     color: #fff;
-    h2{
-      color:#FFF;
-      @include title-fs-M;
-    }
-		.divider {
-      color: #F1F38E
+        h2{
+          color:#FFF;
+          @include title-fs-M;
+          letter-spacing: 3px;
+          line-height:2;
+        }
+        .divider {
+          background: #F1F38E;
+          height: 1px;
+          margin: 56px auto 48px;
+          width: 240px;
+        }
     }
     p{
-      width: 672px;
-      margin: 0 auto;
+      width: 640px;
+      margin: 0 auto 32px;
       text-align: left;
-      @include normal-fs;
+      font-size: 18px;
       font-weight: bold;
       letter-spacing: 4px;
       line-height: 2.4;
     }
+    @include sp{
+      padding: 96px 4%;
+      .wrapper{
+        margin: 0 auto;
+        width: 100%;
+        padding: 56px 8%;
+        h2{
+          line-height: 1.8;
+            font-size: 24px;
+            letter-spacing: 4px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .divider{
+          margin: 32px auto;
+        }
+      }
+      p{
+        width: 101%;
+        font-size: 17px;
+      }
+    }
 	}
-}
+
 
 //****** 使い方
 .howtouse {
-  width: 1240px;
-  margin: 0 auto;
+  
+    .register{
+    }
 	.title {
     p{
       @include normal-fs;
@@ -185,17 +490,79 @@ header{
 }
 
 //****** 登録
+.howtouse{
+  padding: 0 0 64px;
+  text-align: center;
+}
 .register {
+  width: 64%;
+    margin: 0 auto;
+    background-color: #F8F7F5;
+    border-radius: 48px;
+    padding: 64px 48px 40px;
 	.wrapper {
+    margin: 0 auto;
     h3{
-      @include title-fs-L;
+      @include title-fs-M;
+      color:#000;
+      margin-bottom: 0;
     }
 		.regibutton {
 			.content {
+        padding: 24px 40px;
 				.js-modal-open {
           @include cv-button();
+          width: 348px;
+          padding: 30px;
+          display: block;
+          margin: 0 auto;
+          letter-spacing: 2px;
+          font-weight: bold;
 				}
 			}
 		}
 	}
+}
+@include sp{
+  .register{
+    width: 94%;
+    padding: 64px 24px 40px;
+    h3{
+      font-size: 24px;
+    }
+    .js-modal-open {
+      width: 100%;
+    }
+  }
+}
+
+// フッター
+.footer{
+  display: flex;
+    justify-content: space-evenly;
+    padding: 32px 0;
+    width: 40%;
+    margin: 0 auto;
+    font-size: 12px;
+    margin-top: 170px;
+    p{
+      a{
+        text-decoration: none;
+        color: #000;
+      }
+    }
+}
+
+@include sp{
+.footer{
+    width: 100%;
+    display: block;
+    p{
+      text-align: center;
+    font-size: 16px;
+    margin: 16px 0;
+      a{
+      }
+    }
+ }
 }

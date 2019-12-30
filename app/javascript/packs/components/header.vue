@@ -2,9 +2,11 @@
   <header class="header">
     <nav class="nav">
       <ul class="wrapper">
-        <li class="about">サービスについて</li>
+        <li class="about">
+          <a href="https://note.com/design_school/n/na519d684aa05"  target="_blank"> サービスについて</a>
+         </li>
         <li class="ci">
-          <img v-bind:src="require('../images/ci.svg')" alt="newyear">
+          <img v-bind:src="require('../images/logo.svg')" alt="newyear">
           </li>
         <li class="account">
           <a data-method="delete"  href="/users/sign_out">ログアウト</a> 
@@ -32,26 +34,69 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./app/javascript/style/_mixin.scss";
+
 .header {
   background: none;
   width: 92%;
-  padding: 40px 0px;
-  margin: 0 auto 0;
+  padding: 32px 0px;
+  margin: 0 auto 48px;
+  position: relative;
 	.nav {
 		.wrapper {
       display: flex;
       justify-content: space-between;
       width: 100%;
       .about{
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 24px 0;
+        
+          a{
+            text-decoration: none;
+          color: #080725;
+          &:hover{
+            opacity: 0.88;
+          }
+          }
       }
       .ci{}
       .account{
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 24px 0;
+        a{
+          text-decoration: none;
+          color: #080725;
+          &:hover{
+            opacity: 0.88;
+          }
+        }
       }
 		}
 	}
 }
+@include sp{
+  .header {
+    margin-bottom: 80px;
+	.nav {
+		.wrapper {
+          display: block;
+          text-align: center;
+      .about{
+        display: none;
+      }
+      .ci{}
+      .account{
+        display: none;
+        a{
+          }
+        }
+      }
+		}
+	}
+}
+
 </style>
 
 

@@ -6,6 +6,7 @@
         <div class="title">
           <p class="items">PHASE 1</p>
           <h2>今年を振り返る</h2>
+          <p>全部やってもいいし、気になるものだけやってもいいんです。</p>
         </div>
           <!-- テスト一覧を取得する -->
           <ul v-for="m in lbmonths" :key="m.id" class="lbmonths">
@@ -13,7 +14,7 @@
                   <router-link  :to="{ name: 'LookbackMonth', params: { user_id:m.user_id, id:m.id } }">
                       <div class="left">
                         <p class="step">STEP1.</p>
-                        <h3>月ごとに振り返る</h3>
+                        <h3>🤔今年を思い出す - 月ごとに振り返ろう</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -27,7 +28,7 @@
                   <router-link  :to="{ name: 'Reflection', params: { user_id:r.user_id, id:r.id } }">
                       <div class="left">
                         <p class="step">STEP2.</p>
-                        <h3>今年の内省</h3>
+                        <h3>😭今年の反省会 - 負の側面を振り返ろう</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -41,7 +42,7 @@
                   <router-link  :to="{ name: 'Curiosity', params: { user_id:c.user_id, id:c.id } }">
                       <div class="left">
                         <p class="step">STEP3.</p>
-                        <h3>今年の発見</h3>
+                        <h3>😎今年の発見 - ポジティブに感じたことを振り返ろう</h3>
                       </div>
                       <div class="right">
                         <img v-bind:src="require('../images/arrow_right.svg')" alt="arrow">
@@ -120,7 +121,7 @@ export default {
   background-size: contain;
     background-repeat: no-repeat;
     background-color: #FAF8EC;
-    padding-bottom: 80px;
+    padding-bottom: 400px;
 }
 .note {
   @include note;
@@ -133,8 +134,15 @@ export default {
     }
     h2{
       @include fst-l;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
       text-align: center;
+    }
+    p{
+          line-height: 1;
+    margin-bottom: 48px;
+    text-align: center;
+    font-size: 14px;
+
     }
   }
   ul{
@@ -145,7 +153,7 @@ export default {
       a{
         display: flex;
       justify-content: space-between;
-      padding: 32px 40px;
+      padding: 32px 40px 20px;
       background-color: rgba(0,0,0,0.02);
       border-radius: 12px;
       margin-bottom: 20px;
@@ -186,5 +194,19 @@ export default {
          padding: 16px 0px;
        }
 	    }
+}
+
+@include sp{
+  .note {
+    ul{
+    margin: 0;
+    width: 100%;
+     li{
+       a{
+         padding: 32px 20px 20px;
+       }
+     }
+    }
+  }
 }
 </style>

@@ -10,7 +10,7 @@
               <p>戻る</p> 
           </router-link>
         </li>
-        <li class="save">保存する</li>
+        <li @click="createGoal" class="save">保存する</li>
       </ul>
     </nav>
   </header>
@@ -23,15 +23,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./app/javascript/style/_mixin.scss";
 .header {
   background: none;
   padding: 20px 32px;
+  position: relative;
 	.nav {
 		.wrapper {
       display: flex;
       justify-content: space-between;
       width: 100%;
-			.back {
+			 .back{
         padding: 12px 16px;
         a{
           display: flex;
@@ -39,7 +41,11 @@ export default {
           text-decoration: none;
           background-color: rgba(0,0,0,0.04);
           border-radius: 100px;
+           transition: all 0.24s;
           padding: 12px 20px 10px 16px;
+          &:hover{
+            opacity: 0.92;
+          }
           .icon {
               margin-right: 12px
           }

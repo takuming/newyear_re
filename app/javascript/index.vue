@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <div class="wrapper">
     <Header></Header>
     <div class="index_wrapper">
         <div class="title">
-          <h2>来年を等身大で過ごすための</h2>
-          <h2>3つのノートを用意しました</h2>
+          <h2>3ステップで<br>好奇心と出会おう</h2>
+          <p>目標を立てる３テップを用意しました。<br>
+全てやってもいいし、気になるところだけでも。気持ちが向くものからどうぞ。</p>
         </div>
         <div class="section_contents">
           <ul v-on:click="createLookback"  class="content_wrapper">
@@ -16,7 +18,7 @@
                 <div class="text">
                   <span>PHASE 1</span>
                   <h3>今年を振り返る</h3>
-                  <p>今年を振り返りどんな１年だったかを明らかにしましょう。</p>
+                  <!-- <p>今年を振り返りどんな１年だったかを明らかにしましょう。</p> -->
                 </div>
               </router-link>
               </li>
@@ -28,8 +30,8 @@
               </div>
               <div class="text">
                 <span>PHASE 2</span>
-                <h3>今の自分を整理する</h3>
-                <p>変えたいこと、挑戦したいこと。今の自分がうっすらと感じていることを明らかにします。</p>
+                <h3>取り組みたいことを挙げる</h3>
+                <!-- <p>変えたいこと、挑戦したいこと。今の自分がうっすらと感じていることを明らかにします。</p> -->
               </div>
               </router-link>
             </li>
@@ -42,7 +44,7 @@
               <div class="text">
                 <span>PHASE 3</span>
                 <h3>2020年の目標を立てる</h3>
-                <p>新しい年を生きるためのイメージを明確にしてみましょう。</p>
+                <!-- <p>新しい年を生きるためのイメージを明確にしてみましょう。</p> -->
               </div>
               </router-link>
             </li>
@@ -50,9 +52,10 @@
         </div>
     </div>
     <div>
-      {{ info }}
     </div>
     <Footer></Footer>
+
+    </div>
   </div>
 </template>
 
@@ -102,18 +105,38 @@ export default {
 @import "./app/javascript/style/global.scss";
 @import "./app/javascript/style/_mixin.scss";
 
+#app{
+  .wrapper{
+    background-color:#F5F4F1 ;
+  }
+
+}
+
 .index_wrapper{
-  width: 1160px;
+  width: 1180px;
+  width: 82%;
   margin: 0 auto;
-  padding: 0px 0 48px;
+  padding: 0px 0 160px;
 }
 .title {
   @include fst-m;
   text-align: center;
-  margin-bottom:48px;
+  margin-bottom:56px;
   h2{
     letter-spacing: 2px;
     line-height: 2.8rem;
+    font-size: 36px;
+    margin-bottom: 24px;
+    br{
+      display: none;
+    }
+  }
+  p{
+    font-size: 14px;
+    opacity: 0.72;
+    font-weight: normal;
+    line-height: 2;
+    letter-spacing: 2px;
   }
 }
 .section_contents {
@@ -121,34 +144,42 @@ export default {
     display: flex;
     justify-content: space-between;
 		.content{
-      width: 23%;
+      width: 30%;
       &:hover{
         .img{
           top: -8px;
           transition:$transiton-base ;
            transition: top 0.1s;
           position: relative;
+          box-shadow: 2px 2px 32px rgba(0,0,0,0.20);
         }
       }
 			 .img {
+         height: 272px;
+         overflow: hidden;
+         border-radius: 16px;
          top:0px;
          margin-bottom: 24px;
          transition:$transiton-base ;
+         box-shadow: 2px 2px 24px rgba(0,0,0,0.16);
          img{
            width: 100%;
            height: auto;
          }
 			}
 			 .text {
+         margin: 0 12px;
          span{
            @include fsn-xs;
            font-weight: bold;
            margin-bottom: 8px;
            display: block;
+          letter-spacing: 2px;
          }
          h3{
            @include fst-s;
            margin-bottom: 8px;
+           letter-spacing: 1px;
          }
          p{
            @include fsn-s;
@@ -181,4 +212,29 @@ export default {
 .content-leave-active {
   transition: all .5s 0s ease;
 }
+
+@include sp{
+  .index_wrapper{
+    width:88%;
+    .title{
+      h2{
+          line-height: 1.6;
+        br{
+          display:block;
+        }
+      }
+    }
+  }
+  .section_contents {
+      .content_wrapper {
+            display: block;
+        .content{
+              width: 100%;
+              margin-bottom: 64px;
+        }
+      }
+  }
+}
+
+
 </style>

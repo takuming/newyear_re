@@ -10,7 +10,7 @@
               <p>戻る</p> 
           </router-link>
         </li>
-        <li class="save">保存する</li>
+        <li  @click="updateCuriosity" class="save">保存する</li>
       </ul>
     </nav>
   </header>
@@ -23,9 +23,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import "./app/javascript/style/_mixin.scss";
 .header {
   background: none;
   padding: 20px 32px;
+  position: relative;
+  padding: 10px 32px;
+  height: 88px;
 	.nav {
 		.wrapper {
       display: flex;
@@ -39,6 +44,7 @@ export default {
           text-decoration: none;
           background-color: rgba(0,0,0,0.04);
           border-radius: 100px;
+           transition: all 0.24s;
           padding: 12px 20px 10px 16px;
           .icon {
               margin-right: 12px
@@ -55,12 +61,30 @@ export default {
         }
 			}
 			.save {
-        padding: 12px 16px;
+        padding: 24px 24px;
         font-size: 14px;
-        background-color: #fff;
         border-radius: 100px;
+        height: 0;
+        line-height: 0;
+        color: white;
+        background-color: #080725;
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.08);
+        transition: all 0.4s;
+        cursor: pointer;
+        &:hover{
+          background-color: white;
+          color: #080725;
+          font-weight: bold;
+          box-shadow: 1px 1px 8px rgba(0,0,0,0.16);
+        }
 			}
 		}
 	}
+}
+
+@include sp{
+  .header {
+    padding: 10px 0px;
+  }
 }
 </style>

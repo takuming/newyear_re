@@ -21,6 +21,23 @@
   line-height: 1.4;
 };
 
+//スクリーンサイズ
+@mixin pc {
+  @media (max-width: (1024px)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: (680px)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: (480px)) {
+    @content;
+  }
+}
+
 
 // フォント - タイトル
 
@@ -113,11 +130,30 @@ $transiton-base:all 0.24s ease-in;
 
 @mixin note{
   background-color: white;
-    border-radius:8px;
+    border-radius:32px;
     padding: 48px 88px 96px;
     width: 82%;
     margin: 0 auto;
     box-shadow: 1px 1px 12px 4px rgba(0,0,0, 0.04);
+    @include sp{
+      width: 96%;
+      padding: 48px 16px;
+    }
+}
+
+@mixin plist{
+  width: 44%;
+      line-height: 2;
+      margin: 40px auto 90px;
+      border-top: 1px solid rgba(0, 0, 0, 0.16);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+      padding: 40px 0;
+      text-align: left;
+      @include sp{
+        width: 88%;
+        margin: 32px auto 40px;
+        padding: 24px 0;
+      }
 }
 
 // 背景色
