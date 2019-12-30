@@ -79,14 +79,14 @@ export default {
     };
   },
    mounted(){
-    axios
-      .get('/api/v1/efforts.json')
-      .then(response => (this.effort = response.data));
-      axios
+     axios
       .post('/api/v1/efforts', this.effort)
       .then(response => {
         this.$router.push({ name: 'Index'})
-      })
+      });
+    axios
+      .get('/api/v1/efforts.json')
+      .then(response => (this.effort = response.data))
   },
   methods:{
     createLookback: function(){

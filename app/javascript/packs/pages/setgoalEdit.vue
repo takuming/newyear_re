@@ -138,7 +138,6 @@ export default {
               border-right: 1px solid #f3f3f4;
             }
             &:nth-child(1),&:nth-child(2){
-
               border-bottom: 1px solid #f3f3f4;
             }
             
