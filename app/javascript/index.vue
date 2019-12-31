@@ -166,9 +166,9 @@ export default {
     line-height: 2.8rem;
     font-size: 36px;
     margin-bottom: 24px;
-    @include sp[
+    @include sp{
       font-size:24px;
-    ]
+    }
     br{
       display: none;
     }
