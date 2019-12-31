@@ -8,7 +8,7 @@ class Api::V1::GoalsController < ApiController
   end
 
   def index
-    goals = Goal.where(user: current_user).order("created_at ASC")
+    goals = Goal.where(user: current_user).order("created_at DESC")
     render json: goals
   end
 
@@ -46,7 +46,7 @@ class Api::V1::GoalsController < ApiController
     end
 
     def goal_params
-      params.fetch(:goal, {}).permit(:title, :action, :problem).merge({ user: current_user })
+      params.fetch(:goal, {}).permit(:title,:action,:problem,:reason,:people,:environment).merge({ user: current_user })
     end
 
     def correct_user

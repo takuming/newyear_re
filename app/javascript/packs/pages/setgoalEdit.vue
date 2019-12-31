@@ -19,28 +19,53 @@
     <div class="note">
       <div class="wrapper">
           <div class="title">
-            <input v-model="goal.title" v-on:keypress.enter="updateGoal" type="text" placeholder="目標を記入しよう">
+            <input v-model="goal.title" v-on:keypress.enter="updateGoalButton" type="text" placeholder="目標を記入しよう">
           </div>
-          <div class="goalcontent">
-            <ul class="wrapper"  >
-              <li class="detail">
-                <h4>🚀目標のためにやること</h4>
-                <textarea v-model="goal.action" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
-                placeholder="目標達成にやるべきことを具体化してみましょう
 
-■ 環境を変化させて実行できる方法も考えてみましょう
-■ 達成するための条件を考えてみましょう
-■ 細かいイメージまで持つことで達成確率が上がります。多分。">
+          <div class="action_wrap">
+            <li class="detail">
+                <h4 class="subtitle">🚀目標のためにやること/段取り</h4>
+                <textarea class="content" v-model="goal.action" v-on:keypress.enter="updateGoalButton" name="" id="" cols="30" rows="10" 
+                value="" 
+                placeholder="実現に向けてやることを具体化してみよう
+
+■ 目標達成のための要素を分解して言葉にしてみましょう
+■ 可能ならやることに順番をつけてみよう。具体的なイメージにつながるかもよ
+■ 達成状況を測定できるようにする(X回やるetc）と良いかもです。しんどいけど。笑"
+                >
+                </textarea>
+              </li>
+          </div>
+
+          <div class="goalcontent">
+            <ul class="wrapper">
+              <li class="detail people">
+                <h4>❓達成したい理由</h4>
+                <textarea class="content" v-model="goal.reason" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                placeholder="自分だけでも共感できる理由があれば、それが後押ししてくれるはずです">
+                </textarea>
+              </li>
+              <li class="detail environment">
+                <h4>🌈自分を後押しする環境</h4>
+                <textarea class="content" v-model="goal.environment" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                placeholder="環境の力は偉大です
+■ まわりが変わると自分が変わるという話、よく聞きますよね・・・・">
+                </textarea>
+              </li>
+              <li class="detail people">
+                <h4>😶達成を助けてくれる人</h4>
+                <textarea class="content" v-model="goal.people" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                placeholder="誰かの力が必要なこともあるかもしれません。
+■ 励ましてくれる人、教えてくれる人・・・どんな人がいるかな〜">
                 </textarea>
               </li>
               <li class="detail">
                 <h4>⛰達成の障害になること</h4>
                 <textarea v-model="goal.problem" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
-                placeholder="達成が困難な要素をを書き出しましょう
+                placeholder="敵を知り、己を知れば、百戦危うからず〜〜（ドドんっ
 
-■ 先回りして壁になることを予測してみましょう
-■ 壁をイメージすることで達成する確率が上がります。
-■ 解決策はすぐに思いつかないかもしれません。まずは意識するだけで大丈夫です">
+■ 困難にぶつかった時、どうするかも考えると良いかもしれません
+■ 難しいことは早めにやって失敗しておくと良いやり方が見つかるかも">
                 </textarea>
               </li>
             </ul>
@@ -81,10 +106,7 @@ export default {
    updateGoalButton: function(){
       axios
       .patch(`/api/v1/goals/${this.goal.id}`, this.goal)
-      .then(response => {
-        let g = response.data;
-        this.$router.push({name: 'SetgoalEdit', params:{id: g.id}})
-      })
+      
     }
   },
 }
@@ -119,7 +141,25 @@ export default {
           text-align: center;
           margin-bottom: 32px;
         }
-			}
+      }
+      .action_wrap{
+        border-bottom: 1px solid #f3f3f4;
+        margin: 80px 0 56px;
+        .detail{
+          list-style: none;
+        font-size: 20px;
+          .subtitle{
+            margin: 0 0 32px;
+            font-weight: bold;
+          }
+          .content{
+             height: 425px;
+            font-size: 16px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+          }
+        }
+      }
 		}
 	}
 }
@@ -131,14 +171,14 @@ export default {
           justify-content: space-between;
 					.detail {
             width: calc(50% - 16px);
-            height: 400px;
+            height: 280px;
             padding: 24px;
             border-bottom: none;
+            margin-bottom: 80px;
             &:nth-child(odd){
               border-right: 1px solid #f3f3f4;
             }
             &:nth-child(1),&:nth-child(2){
-              border-bottom: 1px solid #f3f3f4;
             }
             
             h4{
@@ -248,6 +288,9 @@ export default {
           display: block;
           .detail{
             width: 100%;
+            &:nth-child(odd){
+              border-right: none;
+            }
           }
         }
       }
