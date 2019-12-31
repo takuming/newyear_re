@@ -40,27 +40,27 @@
             <ul class="wrapper">
               <li class="detail people">
                 <h4>❓達成したい理由</h4>
-                <textarea class="content" v-model="goal.reason" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                <textarea class="content" v-model="goal.reason" v-on:keypress.enter="updateGoalButton" name="" id="" cols="30" rows="10" 
                 placeholder="自分だけでも共感できる理由があれば、それが後押ししてくれるはずです">
                 </textarea>
               </li>
               <li class="detail environment">
                 <h4>🌈自分を後押しする環境</h4>
-                <textarea class="content" v-model="goal.environment" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                <textarea class="content" v-model="goal.environment" v-on:keypress.enter="updateGoalButton" name="" id="" cols="30" rows="10" 
                 placeholder="環境の力は偉大です
 ■ まわりが変わると自分が変わるという話、よく聞きますよね・・・・">
                 </textarea>
               </li>
               <li class="detail people">
                 <h4>😶達成を助けてくれる人</h4>
-                <textarea class="content" v-model="goal.people" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                <textarea class="content" v-model="goal.people" v-on:keypress.enter="updateGoalButton" name="" id="" cols="30" rows="10" 
                 placeholder="誰かの力が必要なこともあるかもしれません。
 ■ 励ましてくれる人、教えてくれる人・・・どんな人がいるかな〜">
                 </textarea>
               </li>
               <li class="detail">
                 <h4>⛰達成の障害になること</h4>
-                <textarea v-model="goal.problem" v-on:keypress.enter="updateGoal" name="" id="" cols="30" rows="10" 
+                <textarea v-model="goal.problem" v-on:keypress.enter="updateGoalButton" name="" id="" cols="30" rows="10" 
                 placeholder="敵を知り、己を知れば、百戦危うからず〜〜（ドドんっ
 
 ■ 困難にぶつかった時、どうするかも考えると良いかもしれません
