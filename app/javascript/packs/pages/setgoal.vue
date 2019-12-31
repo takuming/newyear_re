@@ -120,8 +120,10 @@ export default {
     text-shadow: none;
     color: #999;
     cursor: pointer;
+    transition: all 0.24s;
      &:hover{
-        background-color: #f9fafc; 
+        background: none;
+    background-color: #dadbdd;
       }
     }
     img{

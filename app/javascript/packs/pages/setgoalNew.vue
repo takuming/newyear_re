@@ -1,11 +1,10 @@
 <template>
   <div class="goal_detail">
-    <!-- <HeaderGoal></HeaderGoal> -->
      <header class="header">
         <nav class="nav">
           <ul class="wrapper">
             <li class="back">
-              <router-link to="/setgoal">
+              <router-link to="/">
                   <span class="icon">
                     <img v-bind:src="require('../images/arrow_back.svg')" alt="arrowback">
                   </span>
@@ -28,7 +27,7 @@
       <div class="wrapper">
 
           <div class="title">
-            <input v-model="goal.title" type="text" placeholder="目標 - 例）毎月１冊本を読む">
+            <input v-model="goal.title" type="text" placeholder="目標を設定しよう">
           </div>
 
           <div class="action_wrap">
@@ -135,10 +134,10 @@ export default {
   background-color:#FAF5EC;
   padding-bottom: 80px;
 	.note {
+    @include note;
     background-color: white;
-    border-radius:8px;
     padding: 48px;
-    width: 88%;
+    width: 94%;
     margin: 0 auto;
 		.wrapper {
 			.title {
