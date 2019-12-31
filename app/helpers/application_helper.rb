@@ -3,7 +3,7 @@ module ApplicationHelper
     {
       title: 'NEWYEAR',
       reverse: true,
-      description: 'ディスクリプション',
+      description: '１年の振り返りから、来年やってみたいことがつくれるセルフコーチングサービス',
       keywords: '',
       canonical: request.original_url,
       noindex: ! Rails.env.production?,
@@ -22,9 +22,6 @@ module ApplicationHelper
       twitter: {
         card: 'summary_large_image',
         site: '@takumii_kai',
-      }
-      fb: {
-        app_id: ''
       }
     }
   end
