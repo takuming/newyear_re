@@ -4,58 +4,71 @@
     <Header></Header>
     <div class="index_wrapper">
         <div class="title">
-          <h2>3ステップで<br>好奇心と出会おう</h2>
-          <p>目標を立てる３テップを用意しました。<br>
-全てやってもいいし、気になるところだけでも。気持ちが向くものからどうぞ。</p>
+          <h2>やってみたいことを<br>言葉にしよう</h2>
+          <p>目標を叶えるフォーマットで具体化してみよう</p>
         </div>
-        <div class="section_contents">
-          <ul v-on:click="createLookback"  class="content_wrapper">
-              <li class="content _lookback">
-              <router-link :to="{name:'OpMonth'}">
-                <div class="img">
-                  <img v-bind:src="require('./packs/images/note_lookback.png')">
-                </div>
-                <div class="text">
-                  <span>PHASE 1</span>
-                  <h3>今年を振り返る</h3>
-                  <!-- <p>今年を振り返りどんな１年だったかを明らかにしましょう。</p> -->
-                </div>
-              </router-link>
-              </li>
+        
+        <!-- start -->
 
-            <li v-for="e in effort" :key="e.id"  class="content _interest">
-              <router-link :to="{ name: 'Effort', params: { user_id:e.user_id, id:e.id } }">
-              <div class="img">
-                <img v-bind:src="require('./packs/images/note_interest.png')">
+        <div v-if="goals.length" class="note">
+            <div class="head">
+              <div class="title">
+                <h3>📝目標の一覧</h3>
               </div>
-              <div class="text">
-                <span>PHASE 2</span>
-                <h3>取り組みたいことを挙げる</h3>
-                <!-- <p>変えたいこと、挑戦したいこと。今の自分がうっすらと感じていることを明らかにします。</p> -->
+              <div class="button make_goal">
+                <router-link class="wrapper" :to="{path:'/setgoal/new'}">
+                    <img v-bind:src="require('./packs/images/add.svg')" alt="arrow">
+                    <p>作成する</p>
+                </router-link>
               </div>
-              </router-link>
-            </li>
+            </div>
+            <ul v-for="g in goals" :key="g.id" class="goals">
+              <li class="item">
+                
+                  <div class="wrap">
+                    <router-link class="content" :to="{ name: 'SetgoalEdit', params: { id: g.id } }">
+                      <h3 class="title">{{g.title}}</h3>
+                    </router-link>
+                    <div class="right_wrapper">
+                      <button class="btn_delete" @click="deleteTarget = g.id; showModal = true">削除</button>
+                      <img v-bind:src="require('./packs/images/arrow_right.svg')" alt="arrow">
+                    </div>
+                  </div>
+                
+              
+              </li>
+            </ul>
             
-            <li class="content _goalset">
-              <router-link :to="{ name: 'OpGoal'}">
-              <div class="img">
-                <img v-bind:src="require('./packs/images/note_goalset.png')">
-              </div>
-              <div class="text">
-                <span>PHASE 3</span>
-                <h3>2020年の目標を立てる</h3>
-                <!-- <p>新しい年を生きるためのイメージを明確にしてみましょう。</p> -->
-              </div>
-              </router-link>
-            </li>
-          </ul>
-        </div>
+            
+          </div>
+
+           <div v-else class="note">
+             <div class="ifempty">
+               <div class="image">
+                 <img v-bind:src="require('./packs/images/377-original.png')" >
+               </div>
+               <div class="message">さっそく目標を言葉にしてみよう</div>
+               <div class="button make_goal">
+                  <router-link class="wrapper" :to="{path:'/setgoal/new'}">
+                      <img v-bind:src="require('./packs/images/add.svg')" alt="arrow">
+                      <p>目標をつくる</p>
+                  </router-link>
+                </div>
+             </div>
+             
+             </div>
+        <!-- end -->
+       
     </div>
     <div>
     </div>
     <Footer></Footer>
-
     </div>
+    <modal class="modal_delete" v-if="showModal" @cancel="showModal = false" @ok="deleteGoal(); showModal = false;">
+            <div class="wrap" slot="body"> 
+              <p> 削除してもよろしいですか？</p>
+            </div>
+    </modal>
   </div>
 </template>
 
@@ -63,19 +76,23 @@
 <script>
 import axios from 'axios';
 
+import Modal from "./packs/components/modal.vue";
 import Header from "./packs/components/header.vue";
 import Footer from "./packs/components/footer.vue";
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    Modal
   },
   data: function() {
     return {
       effort:[],
-      message: "",
-      info:null,
+      goals: [],
+      showModal: false,
+      deleteTarget: -1,
+      errors: ''
     };
   },
    mounted(){
@@ -86,16 +103,37 @@ export default {
       });
     axios
       .get('/api/v1/efforts.json')
-      .then(response => (this.effort = response.data))
+      .then(response => (this.effort = response.data));
+
+    this.updateGoals();
+    axios
+      .get('/api/v1/goals.json')
+      .then(response => (this.goals = response.data))
   },
-  methods:{
-    createLookback: function(){
+  methods: {
+    deleteGoal: function() {
+      if (this.deleteTarget <= 0) {
+        console.warn('deleteTarget should be grater than zero.');
+        return;
+      }
+
       axios
-      .post('/api/v1/lbmonths', this.lbmonths);
+        .delete(`/api/v1/goals/${this.deleteTarget}`)
+        .then(response => {
+          this.deleteTarget = -1;
+          this.updateGoals();
+        })
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+    updateGoals: function() {
       axios
-      .post('/api/v1/lbreflections', this.lbreflections);
-      axios
-      .post('/api/v1/lbcuriosities', this.lbcuriosities)
+        .get('/api/v1/goals.json')
+        .then(response => (this.goals = response.data))
     }
   },
 };
@@ -104,6 +142,7 @@ export default {
 <style lang="scss" scoped>
 @import "./app/javascript/style/global.scss";
 @import "./app/javascript/style/_mixin.scss";
+@import "./app/javascript/style/setgoal.scss";
 
 #app{
   .wrapper{
@@ -235,6 +274,8 @@ export default {
       }
   }
 }
+
+
 
 
 </style>

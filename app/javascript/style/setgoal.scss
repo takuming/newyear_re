@@ -1,0 +1,183 @@
+.btn_delete{
+  background-color: #f3f3f4;
+font-size: 12px;
+background: #f3f3f4;
+background-image: none;
+border: none;
+box-shadow: none;
+text-shadow: none;
+color: #999;
+cursor: pointer;
+ &:hover{
+  background: none;
+  background-color: #dadbdd;
+  }
+}
+
+
+
+.note {
+    @include note;
+    padding: 72px;
+    width: 95%;
+    min-height: 400px;
+    .head{
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0 32px;
+      margin-bottom: 32px;
+      .title{
+        margin: 0;
+        padding: 12px 0;
+        h3{
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+      .make_goal{
+        margin: 0;
+        transition:all 0.24s;
+        .wrapper{
+          width: 140px;
+        }
+      }
+    }
+		.goals {
+      transition: all 0.16s;
+      &:hover{
+          border-radius: 16px;
+          background-color: #f9fafc; 
+          .title{
+            margin-right:16px;
+          }
+        }
+			.item {
+        border-bottom: 1px solid #f3f3f4;
+        padding: 24px 0;
+        border-radius: 16px;
+        margin-bottom: 24px;
+        .wrap{
+              background-color: none!important;
+              display: flex;
+              justify-content: space-between;
+              .content{
+                padding: 24px 0;
+                  width: 80%;
+                .title {
+                  @include fst-s;
+                  text-align: left;
+                  margin-left:16px;
+                  margin: 0;
+                }
+              }
+              .right_wrapper{
+                    padding: 24px 0;
+                    img{
+                      margin: -7px 0;
+                    }
+              }
+              
+        }
+				
+			}
+    }
+    .ifempty{
+      .image{
+        width: 240px;
+        height: 240px;
+        border-radius: 400px;
+        margin: 0 auto;
+        overflow: hidden;
+        img{
+          width: auto;
+          height: 270px;
+          bottom: 11%;
+          position: relative;
+        }
+      }
+      .message{
+        text-align: center;
+        margin: 32px 0;
+        font-weight: bold;
+      }
+      .make_goal{
+        margin-top: 24px;
+        .wrapper{
+          margin: 0 auto;
+          width: 20%;
+          transition: all 0.24s;
+          &:hover{
+            background-color: #dadbdd!important;
+          }
+        }
+      }
+    }
+  }
+
+
+  .modal_delete{
+    .modal-container{
+          width: 320px;
+          padding: 32px 32px 64px;
+          border-radius: 16px;
+      .modal-default-button{
+        background-color: #f3f3f4;
+        font-size: 16px;
+        background: #f3f3f4;
+        background-image: none;
+        border: none;
+        box-shadow: none;
+        text-shadow: none;
+        color: #000;
+        cursor: pointer;
+        padding: 12px 28px;
+        &.ok{}
+        &.delete{
+          background: none;
+          color: #999
+        }
+      }
+    }
+  }
+
+
+
+  .make_goal{
+    margin: 64px 0 0;
+    .wrapper{
+      display: flex;
+      justify-content: space-between;
+      img{
+            margin: -5px 0 0;
+      }
+    }
+    a{
+    padding: 20px 24px 16px;
+    background-color: #f3f3f4;
+    display: block;
+    border-radius: 100px;
+    width: 15.5%;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 24px;
+    &:hover{
+      background-color: #dadbdd;
+    }
+    }
+  }
+
+
+@include sp{
+  .note{
+    min-height: 296px!important;
+  }
+  .setgoal {
+    .make_goal{
+      .wrapper{
+        width: 60%;
+        padding: 28px 24px 24px;
+      }
+    }
+  }
+}
