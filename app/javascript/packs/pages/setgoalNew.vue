@@ -32,20 +32,31 @@
 
           <div class="action_wrap">
             <li class="detail">
-                <h4 class="subtitle">🚀目標のためにやること/段取り</h4>
+                <h4 class="subtitle">🚀目標のためにやること/段取りを書き出そう</h4>
                 <textarea class="content" v-model="goal.action" v-on:keypress.enter="createGoal" name="" id="" cols="30" rows="10" 
                 value="" 
                 placeholder="実現に向けてやることを具体化してみよう
 
-■ 目標達成のための要素を分解して言葉にしてみましょう
-■ 可能ならやることに順番をつけてみよう。具体的なイメージにつながるかもよ
-■ 達成状況を測定できるようにする(X回やるetc）と良いかもです。"
+■ 🤔目標達成のための要素を分解して言葉にしてみましょう
+■ 🌈自分を後押しする環境を作ることも考えるとよいかも
+■ 😶達成を助けてくれる人や会うべき人がいれば加速してくれるかも"
+                >
+                </textarea>
+              </li>
+              <li class="detail">
+                <h4 class="subtitle">⛰達成の障害になることを書き出そう</h4>
+                <textarea class="content" v-model="goal.problem" v-on:keypress.enter="createGoal" name="" id="" cols="30" rows="10" 
+                value="" 
+                placeholder="敵を知り、己を知れば、百戦危うからず
+
+■ 👀 難しいことは早めにやって失敗しておくと良いやり方が見つかるかも
+■ 😛 困難にぶつかった時の対処を今のうちから考えると良いかもしれません"
                 >
                 </textarea>
               </li>
           </div>
 
-          <div class="goalcontent">
+          <!-- <div class="goalcontent">
             <ul class="wrapper" >
               <li class="detail people">
                 <h4>❓達成したい理由</h4>
@@ -77,7 +88,7 @@
                 </textarea>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
     </div>
     </form>
@@ -158,11 +169,20 @@ export default {
         }
       }
       .action_wrap{
+        display: flex;
+        justify-content: space-between;
         border-bottom: 1px solid #f3f3f4;
         margin: 80px 0 56px;
+        @include sp{
+          display: block;
+        }
         .detail{
+          width: calc(50% - 16px);
           list-style: none;
         font-size: 20px;
+        @include sp{
+          width: 100%;
+        }
           .subtitle{
             margin: 0 0 32px;
             font-weight: bold;
@@ -282,6 +302,12 @@ export default {
 	}
 }
 @include sp{
+  .action_wrap{
+        display: block;
+        .detail{
+          width: 100%
+        }
+  }
   .goal_detail{
     .header{
         padding: 20px 4px;

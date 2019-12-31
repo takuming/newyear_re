@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155163824-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155163824-1');
+</script>
+
     <%= favicon_link_tag('favicon.ico') %>
     <title>NEWYEAR</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/ fb# prefix属性: http://ogp.me/ns/ prefix属性#">
-    <meta property="og:url" content="https://newyearr.me" />
+    <meta property="og:url" content="https://murmuring-tor-67191.herokuapp.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NEWYEAR 今年のじぶんと旅に出る | １年の振り返りから、来年やってみたいことがつくれるセルフコーチングサービスです。" />
     <meta property="og:description" content=" ページのディスクリプション" />
     <meta property="og:site_name" content="NEWYEAR" />
-    <meta property="og:image" content="http://newyarr.me/assets/ogp.png" >
+    <meta property="og:image" content="https://imageuploadnewyear.s3.ca-central-1.amazonaws.com/ogp.png" >
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>

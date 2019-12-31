@@ -171,6 +171,7 @@ cursor: pointer;
 @include sp{
   .note{
     min-height: 296px!important;
+    width: 100%;
   }
   .setgoal {
     .make_goal{
