@@ -12,7 +12,7 @@ module ApplicationHelper
       ],
       og: {
         site_name: 'NEWYEAR',
-        title: 'NEWYEAR 今年のじぶんと旅に出る | １年の振り返りから、来年やってみたいことがつくれるセルフコーチングサービス',
+        title: 'NEWYEAR - 今年のじぶんと旅に出る',
         description: '今年のじぶんと旅に出る | １年の振り返りから、来年やってみたいことがつくれるセルフコーチングサービス', 
         type: 'website',
         url: request.original_url,
